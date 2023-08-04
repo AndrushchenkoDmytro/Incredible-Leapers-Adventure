@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class PlayerController : MonoBehaviour
 {
-
+    [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float flyForce = 10f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private int jumpCount = 2;
     [SerializeField] private Transform groundCheck;
@@ -42,9 +39,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFall = false;
     [SerializeField] private bool isWallRight = false;
     [SerializeField] private bool isWallLeft = false;
+    [SerializeField] public bool isFly = false;
 
     private bool checkGround = true;
     private bool stopCheckGround = false;
+
+    public System.Action<float> OnPlayerGetDamage;
 
     private void Awake()
     {
@@ -60,13 +60,13 @@ public class PlayerController : MonoBehaviour
     {
         CheckInput();
         CountdownToCheckGround();
-        CheckSurroundings();
         CheckMovementDirection();
         ApplyMovement();
     }
 
     private void FixedUpdate()
     {
+        CheckSurroundings();
         CheckPlayerState();
         DebugDrawBox(leftWallCheck.position, wallCheckSize, 0, UnityEngine.Color.blue, 1f);
         DebugDrawBox(rightWallCheck.position, wallCheckSize, 0, UnityEngine.Color.red, 1f);
@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        Fly();
 
         if(xDirection != 0)
         {
@@ -157,7 +159,6 @@ public class PlayerController : MonoBehaviour
         {
             playerState = State.Idle;
         }
-        Debug.Log(playerState);
         animator.SetInteger("PlayerState",(int)playerState);
     }
 
@@ -181,16 +182,20 @@ public class PlayerController : MonoBehaviour
             if (isFasingRight == true)
             {
                 isFasingRight = false;
-                playerSprite.flipX = true;
-                rightWallCheck.position -= rightWallCheckShift;
-                leftWallCheck.position -= leftWallCheckShift;
+                //playerSprite.flipX = true;
+                Vector3 rotator = new Vector3(transform.rotation.x, 180, transform.rotation.z);
+                transform.rotation = Quaternion.Euler(rotator);
+                //rightWallCheck.position -= rightWallCheckShift;
+                //leftWallCheck.position -= leftWallCheckShift;
             }
             else
             {
                 isFasingRight = true;
-                playerSprite.flipX = false;
-                rightWallCheck.position += rightWallCheckShift;
-                leftWallCheck.position += leftWallCheckShift;
+                //playerSprite.flipX = false;
+                Vector3 rotator = new Vector3(transform.rotation.x, 0, transform.rotation.z);
+                transform.rotation = Quaternion.Euler(rotator);
+               // rightWallCheck.position += rightWallCheckShift;
+                //leftWallCheck.position += leftWallCheckShift;
             }
         }
     }
@@ -219,9 +224,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-
                     isFall = true;
-
                     isJump = false;
                     isDoubleJump = false;
                 }
@@ -239,7 +242,10 @@ public class PlayerController : MonoBehaviour
 
             if (leftWalljumpBonus > 0)
             {
-                jumpCount++;
+                if(jumpCount < 2)
+                {
+                    jumpCount++;
+                }
                 leftWalljumpBonus--;
             }
             isWallLeft = true;
@@ -257,7 +263,10 @@ public class PlayerController : MonoBehaviour
 
             if (rightWalljumpBonus > 0)
             {
-                jumpCount++;
+                if (jumpCount < 2)
+                {
+                    jumpCount++;
+                }
                 rightWalljumpBonus--;
             }
             isWallRight = true;
@@ -278,23 +287,68 @@ public class PlayerController : MonoBehaviour
             isFall = false;
             if(yDirection < 0)
             {
-                rb.gravityScale = 1;
+                rb.gravityScale = 0.75f;
+                if(yDirection < -4 )
+                {
+                    yDirection *= 0.4f;
+                }
             }
             else
             {
-                rb.gravityScale = 4;
+                if (yDirection > 5)
+                {
+                    onWall = false;
+                }
+                    rb.gravityScale = 4;
             }
         }
         else
         {
             rb.gravityScale = 4;
         }
+
+        if(isFly == true)
+        {
+            onWall = false;
+            isJump = true;
+            isFall = false;
+        }
+
+        
     }
 
     void ApplyMovement()
     {
         Direction = new Vector2(xDirection, yDirection);
         rb.velocity = Direction;
+    }
+
+    public void GetDamage(int damageValue)
+    {
+        if(isHit == false)
+        {
+            health -= damageValue;
+            OnPlayerGetDamage?.Invoke(health);
+            isHit = true;
+            if (health < 0)
+            {
+                KillPlayer();
+            }
+            else
+            {
+                Invoke("StopHit", 2);
+            }
+        }
+    }
+
+    private void KillPlayer()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void StopHit()
+    {
+        isHit = false;
     }
 
     void Jump()
@@ -313,6 +367,34 @@ public class PlayerController : MonoBehaviour
             yDirection = jumpForce;
             jumpCount--;
         }
+    }
+
+    private  void Fly()
+    {
+        if(isFly == true)
+        {
+            if (yDirection < 0)
+            {
+                yDirection = 0.5f;
+            }
+            if (yDirection < 8)
+            {
+                yDirection += Time.deltaTime * flyForce;
+            }
+        }
+    }
+
+
+    public void ThrowCharacterUp(Vector2 force)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(force);
+        /*yDirection = rb.velocity.y;
+        if(yDirection > 20f)
+        {
+            yDirection = 20f;
+        }*/
+        isJump = true;
     }
 
     private void OnDrawGizmos()
