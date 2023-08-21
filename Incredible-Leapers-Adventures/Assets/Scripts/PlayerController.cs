@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
@@ -15,18 +14,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform leftWallCheck;
     [SerializeField] private Transform rightWallCheck;
     [SerializeField] private Vector2 wallCheckSize = new Vector2(1,1);
-    [SerializeField] private Vector3 leftWallCheckShift = new Vector3(0.07f, 0, 0);
-    [SerializeField] private Vector3 rightWallCheckShift = new Vector3(0.05f, 0, 0);
     [SerializeField] private int leftWalljumpBonus = 1;
     [SerializeField] private int rightWalljumpBonus = 1;
 
     private Rigidbody2D rb;
-    private SpriteRenderer playerSprite;
     private Animator animator;
 
+    [SerializeField] private float throwDirectionX = 1;
     private float xDirection = 0;
     private float yDirection = 0;
-    private Vector2 Direction = Vector2.zero;
+    private Vector2 moveDirection = Vector2.zero;
     private bool isFasingRight = true;
 
     [SerializeField] private State playerState = State.Idle;
@@ -49,7 +46,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerSprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         groundCheck = transform.GetChild(0).transform;
         rightWallCheck = transform.GetChild(1).transform;
@@ -179,24 +175,22 @@ public class PlayerController : MonoBehaviour
     {
         if (onWall == false)
         {
+            Vector3 rotator;
             if (isFasingRight == true)
             {
                 isFasingRight = false;
-                //playerSprite.flipX = true;
-                Vector3 rotator = new Vector3(transform.rotation.x, 180, transform.rotation.z);
+                rotator = new Vector3(transform.rotation.x, 180, transform.rotation.z);
                 transform.rotation = Quaternion.Euler(rotator);
-                //rightWallCheck.position -= rightWallCheckShift;
-                //leftWallCheck.position -= leftWallCheckShift;
             }
             else
             {
                 isFasingRight = true;
-                //playerSprite.flipX = false;
-                Vector3 rotator = new Vector3(transform.rotation.x, 0, transform.rotation.z);
+                rotator = new Vector3(transform.rotation.x, 0, transform.rotation.z);
                 transform.rotation = Quaternion.Euler(rotator);
-               // rightWallCheck.position += rightWallCheckShift;
-                //leftWallCheck.position += leftWallCheckShift;
             }
+            rotator = leftWallCheck.position;
+            leftWallCheck.position = rightWallCheck.position;
+            rightWallCheck.position = rotator;
         }
     }
 
@@ -319,11 +313,15 @@ public class PlayerController : MonoBehaviour
 
     void ApplyMovement()
     {
-        Direction = new Vector2(xDirection, yDirection);
-        rb.velocity = Direction;
+        if(xDirection == 0 || isHit == true)
+        {
+            xDirection = rb.velocity.x;
+        }
+        moveDirection = new Vector2(xDirection, yDirection);
+        rb.velocity = moveDirection;
     }
 
-    public void GetDamage(int damageValue)
+    public void GetDamage(float damageValue)
     {
         if(isHit == false)
         {
@@ -336,7 +334,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Invoke("StopHit", 2);
+                Invoke("StopHit", 0.350f);
             }
         }
     }
@@ -385,16 +383,34 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void ThrowCharacterUp(Vector2 force)
+    public void ThrowCharacter(Vector2 force)
     {
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(force);
-        /*yDirection = rb.velocity.y;
-        if(yDirection > 20f)
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
         {
-            yDirection = 20f;
-        }*/
-        isJump = true;
+            float damage = collision.gameObject.GetComponent<IDamageCheck>().CheckForDamage(transform.position);
+            if (damage <= 0)
+            {
+                ThrowCharacter(moveDirection.normalized * 100);
+            }
+            else
+            {
+                if(transform.position.x > collision.transform.position.x)
+                {
+                    rb.AddForce(new Vector2(Random.Range(150, 250), Random.Range(250, 350)));
+                }
+                else
+                {
+                    rb.AddForce(new Vector2(Random.Range(-250, -150), Random.Range(250, 350)));
+                }
+                isJump = true;
+                GetDamage(damage);
+            }
+        }
     }
 
     private void OnDrawGizmos()

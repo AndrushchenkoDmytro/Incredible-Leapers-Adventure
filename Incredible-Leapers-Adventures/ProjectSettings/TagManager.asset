@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fan
   - JumpPlatform
+  - TileMap
+  - Enemy
   layers:
   - Default
   - TransparentFX
