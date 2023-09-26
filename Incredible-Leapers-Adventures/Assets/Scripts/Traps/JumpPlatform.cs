@@ -5,9 +5,11 @@ using UnityEngine;
 public class JumpPlatform : MonoBehaviour
 {
     Animator animator;
+    AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
 
@@ -15,8 +17,9 @@ public class JumpPlatform : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().ThrowCharacter(Vector2.up * 900);
-            Invoke("PlatformPush", 0.02f);
+            audioSource.Play();
+            collision.gameObject.GetComponent<PlayerController>().ThrowCharacter(Vector2.up * 950);
+            Invoke("PlatformPush", 0.04f);
         }
     }
 

@@ -8,6 +8,7 @@ public class Slime : MonoBehaviour,IDamageCheck
 {
     private Rigidbody2D rb;
     private Animator animator;
+    private AudioSource audioSource;
     [SerializeField]  private LayerMask layerMask;
     RaycastHit2D ray;
     private Vector2 jumpDirection;
@@ -21,6 +22,7 @@ public class Slime : MonoBehaviour,IDamageCheck
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         jumpDirection = new Vector2(Random.Range(-400f, -200f), Random.Range(200f, 310f));
     }
 
@@ -37,12 +39,13 @@ public class Slime : MonoBehaviour,IDamageCheck
             }
             else
             {
+                audioSource.Play();
                 rb.AddForce(jumpDirection);
                 canJump = false;
                 jumpOnSpot = true;
             }
         }
-        if(rb.velocity.y == 0)
+        else if (rb.velocity.y == 0)
         {
             if(waitTime <= 0)
             {
@@ -97,6 +100,7 @@ public class Slime : MonoBehaviour,IDamageCheck
 
     IEnumerator KillSlime()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         animator.SetInteger("State", 1);
         rb.velocity = Vector2.zero;
         GetComponent<CompositeCollider2D>().isTrigger = true;

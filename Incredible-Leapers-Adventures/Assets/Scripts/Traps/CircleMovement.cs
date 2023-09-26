@@ -15,12 +15,14 @@ public class CircleMovement : MonoBehaviour
     private float[] distancesBetweenPoints = new float[4];
     private float currentDistance = 0;
 
+    private AudioSource audioSource;
     private Animator animator;
     [SerializeField] private AnimationCurve animationCurve;
     private float curveTime = 0;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         transform.position = MovePoint[currentIndex];
 
@@ -41,7 +43,7 @@ public class CircleMovement : MonoBehaviour
     {
         if (isStop == false)
         {
-            if (isClockWise == true)
+            if (isClockWise)
             {
                 if(currentIndex == 0)
                 {
@@ -59,6 +61,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 1);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else if(currentIndex == 1)
@@ -77,6 +80,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 2);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else if (currentIndex == 2)
@@ -95,6 +99,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 3);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else
@@ -114,6 +119,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 0);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
             }
@@ -135,6 +141,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 2);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else if (currentIndex == 1)
@@ -153,6 +160,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 1);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else if (currentIndex == 2)
@@ -171,6 +179,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 0);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
                 else
@@ -189,6 +198,7 @@ public class CircleMovement : MonoBehaviour
                         isStop = true;
                         animator.SetInteger("pointIndex", 3);
                         animator.SetBool("isStop", isStop);
+                        audioSource.Play();
                     }
                 }
             }

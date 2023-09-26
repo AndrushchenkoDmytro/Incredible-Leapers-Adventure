@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Turtle : MonoBehaviour, IDamageCheck
@@ -11,11 +12,14 @@ public class Turtle : MonoBehaviour, IDamageCheck
     private float spikesTime = 2.1f;
     private float turtleTime = 1.4f;
     private float animTransitionTime = 0.4f;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private bool isSpikesOut = true;
     private bool isDie = false;
 
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -46,6 +50,7 @@ public class Turtle : MonoBehaviour, IDamageCheck
                     {
                         if(state == 0)
                         {
+                            audioSource.Play();
                             animator.SetInteger("State", 1);
                             state = 1;
                         }
@@ -71,6 +76,7 @@ public class Turtle : MonoBehaviour, IDamageCheck
                     {
                         if (state == 1)
                         {
+                            audioSource.Play();
                             animator.SetInteger("State", 0);
                             state = 0;
                         }

@@ -78,6 +78,7 @@ public class MushRoom : MonoBehaviour, IDamageCheck
 
     IEnumerator KillMushRoom()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         animator.SetInteger("State", 2);
         speedUpTime = -1;
         rb.velocity = Vector2.zero;

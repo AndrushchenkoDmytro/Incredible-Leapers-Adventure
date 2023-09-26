@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FatBird : MonoBehaviour, IDamageCheck
 {
@@ -17,10 +18,15 @@ public class FatBird : MonoBehaviour, IDamageCheck
     private bool isDie = false;
     private float groundTime = 0.8f;
     private ParticleSystem particleSystem;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip falling;
+    [SerializeField] private AudioClip ground;
+    [SerializeField] private AudioClip flying;
 
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         flyForceY = flyForce.y;
@@ -33,6 +39,8 @@ public class FatBird : MonoBehaviour, IDamageCheck
         {
             if (isFly)
             {
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
                 if (transform.localPosition.y < topPoint)
                 {
                     if (flyAnimLenth > 0)
@@ -60,6 +68,8 @@ public class FatBird : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Stop();
+                        audioSource.PlayOneShot(falling);
                         isFly = false;
                         isFall = true;
                         flyTime = 1.5f;
@@ -82,6 +92,7 @@ public class FatBird : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Play();
                         groundTime = 0.8f;
                         rb.gravityScale = 0.5f;
                         flyForce.y = flyForceY;
@@ -98,6 +109,8 @@ public class FatBird : MonoBehaviour, IDamageCheck
 
     IEnumerator KillBird()
     {
+        audioSource.enabled = false;
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         isDie = true;
         animator.SetInteger("State", 3);
         GetComponent<CompositeCollider2D>().isTrigger = true;
@@ -132,6 +145,7 @@ public class FatBird : MonoBehaviour, IDamageCheck
     {
         if(collision.gameObject.tag == "TileMap")
         {
+            audioSource.PlayOneShot(ground);
             Debug.Log("TIleMap");
             isFall = false;
             animator.SetInteger("State",2);

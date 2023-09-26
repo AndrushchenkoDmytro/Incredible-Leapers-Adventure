@@ -1,9 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // [SerializeField] private PlayerStats ps;
+    [SerializeField] private InputHandler inputHandler;
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
+    private float moveScale = 0.15f;
+    private float fallTime = 0;
     [SerializeField] private float flyForce = 10f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private int jumpCount = 2;
@@ -20,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    [SerializeField] private float throwDirectionX = 1;
+    private bool canMove = true;
     private float xDirection = 0;
     private float yDirection = 0;
     private Vector2 moveDirection = Vector2.zero;
@@ -38,15 +43,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isWallLeft = false;
     [SerializeField] public bool isFly = false;
 
+    private AudioSource audioSource;
+    [SerializeField] AudioClip[] clips;
+
     private bool checkGround = true;
     private bool stopCheckGround = false;
 
     public System.Action<float> OnPlayerGetDamage;
+    public System.Action OnPlayerDie;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        inputHandler = GetComponent<InputHandler>();
+        audioSource = GetComponent<AudioSource>();
         groundCheck = transform.GetChild(0).transform;
         rightWallCheck = transform.GetChild(1).transform;
         rightWallCheck = transform.GetChild(2).transform;
@@ -70,15 +81,38 @@ public class PlayerController : MonoBehaviour
 
     void CheckInput()
     {
-        xDirection = Input.GetAxis("Horizontal") * movementSpeed;
+        if (canMove)
+        {
+            if (inputHandler.xInput != 0)
+            {
+                if (moveScale < 1)
+                    moveScale += 0.04f;
+                if (onGround == true)
+                {
+                    if (!audioSource.isPlaying)
+                    {
+                        audioSource.clip = clips[6];
+                        audioSource.Play();
+                    }
+                }
+            }
+            else
+            {
+                if (moveScale > 0.25f)
+                    moveScale -= 0.05f;
+            }
+        }
+
+        xDirection = inputHandler.xInput * moveScale * movementSpeed; //Input.GetAxis("Horizontal")
         yDirection = rb.velocity.y;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (inputHandler.jumpInput) //Input.GetKeyDown(KeyCode.Space)
         {
+            inputHandler.jumpInput = false;
             Jump();
         }
 
-        Fly();
+        CheckFly();
 
         if(xDirection != 0)
         {
@@ -106,6 +140,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (isFall)
+        {
+            fallTime += Time.deltaTime;
+        }
     }
 
     private void CountdownToCheckGround()
@@ -120,7 +159,7 @@ public class PlayerController : MonoBehaviour
             {
                 checkGround = true;
                 stopCheckGround = false;
-                timeToChekGround = 0.15f;
+                timeToChekGround = 0.1f;
             }
         }
     }
@@ -200,6 +239,14 @@ public class PlayerController : MonoBehaviour
         {
             if(Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,checkLayer) == true)
             {
+                if(onGround == false)
+                {
+                    if(fallTime > 0.8f)
+                    {
+                        audioSource.PlayOneShot(clips[8]);
+                        fallTime = 0;
+                    }
+                }
                 onGround = true;
                 isFall = false;
                 isJump = false;
@@ -326,22 +373,38 @@ public class PlayerController : MonoBehaviour
         if(isHit == false)
         {
             health -= damageValue;
+            jumpCount++;
+            audioSource.PlayOneShot(clips[Random.Range(0, 3)]);
             OnPlayerGetDamage?.Invoke(health);
             isHit = true;
             if (health < 0)
             {
+                AudioManager.Instance.PlayAudioEffect(clips[7], 2.25f);
                 KillPlayer();
             }
             else
             {
-                Invoke("StopHit", 0.350f);
+                Invoke("StopHit", 0.40f);
             }
         }
     }
 
     private void KillPlayer()
     {
+        StartCoroutine(DestroyPlayer());
+    }
+
+    IEnumerator DestroyPlayer()
+    {
+        animator.Play("Disappearing");
+        canMove = false;
+        moveScale = 0;
+        yield return new WaitForSeconds(0.355f);
+        OnPlayerDie?.Invoke();
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 0;
         gameObject.SetActive(false);
+
     }
 
     private void StopHit()
@@ -351,29 +414,37 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(jumpCount == 2)
+        if(jumpCount > 1)
         {
             isJump = true;
             checkGround = false;
             stopCheckGround = true;
             yDirection = jumpForce;
             jumpCount--;
+            if (onWall)
+                audioSource.PlayOneShot(clips[3]);
+            else
+                audioSource.PlayOneShot(clips[Random.Range(4,6)]);
         }
         else if(jumpCount == 1)
         {
             isDoubleJump = true;
             yDirection = jumpForce;
             jumpCount--;
+            if (onWall)
+                audioSource.PlayOneShot(clips[3]);
+            else
+                audioSource.PlayOneShot(clips[Random.Range(4, 6)]);
         }
     }
 
-    private  void Fly()
+    private void CheckFly()
     {
         if(isFly == true)
         {
             if (yDirection < 0)
             {
-                yDirection = 0.5f;
+                yDirection = 0.9f;
             }
             if (yDirection < 8)
             {
@@ -382,10 +453,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public void SetFly(bool isFly, bool up)
+    {
+        this.isFly = isFly;
+        if (isFly)
+        {
+            if (up)
+            {
+                if (flyForce < 0)
+                    flyForce *= -1;
+            }
+            else
+            {
+                if (flyForce > 0)
+                    flyForce *= -1;
+            }
+        }
+    } 
     public void ThrowCharacter(Vector2 force)
     {
-        
+        rb.velocity = Vector2.zero;
+        rb.AddForce(force);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -395,7 +483,7 @@ public class PlayerController : MonoBehaviour
             float damage = collision.gameObject.GetComponent<IDamageCheck>().CheckForDamage(transform.position);
             if (damage <= 0)
             {
-                ThrowCharacter(moveDirection.normalized * 100);
+                rb.AddForce(new Vector2(0, Random.Range(180, 250)));
             }
             else
             {

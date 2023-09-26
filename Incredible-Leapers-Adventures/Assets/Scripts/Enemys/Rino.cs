@@ -14,13 +14,16 @@ public class Rino : MonoBehaviour, IDamageCheck
     [SerializeField] private Transform overlapPOs;
     [SerializeField] private Vector3 moveDirection = Vector3.left;
     [SerializeField] private bool moveLeft = true;
+    [SerializeField] private AudioClip bam;
+    [SerializeField] private AudioClip walk;
+    public AudioSource audioSource;
 
     public float stayTime = 0;
     public float moveTime = 0;
 
     [SerializeField] private bool isIdle = true;
     public bool hasTarget = false;
-    [SerializeField] private bool isWallHit = false;
+    public bool stopPursuit = true;
     private bool isDie = false;
 
     private void Awake()
@@ -36,6 +39,7 @@ public class Rino : MonoBehaviour, IDamageCheck
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -47,18 +51,25 @@ public class Rino : MonoBehaviour, IDamageCheck
                 if (transform.localPosition.x > leftPointX)
                 {
                     moveTime += Time.fixedDeltaTime;
+
                     if (hasTarget == true)
                     {
+                        if (!audioSource.isPlaying)
+                            audioSource.Play();
                         transform.position += moveDirection * curve.Evaluate(moveTime) * Time.fixedDeltaTime;
                     }
                     else
                     {
-                        if (moveTime < 2)
+                        if (moveTime < 2.2f)
                         {
+                            if (!audioSource.isPlaying)
+                                audioSource.Play();
                             transform.position += moveDirection * 0.1f * Time.fixedDeltaTime;
                         }
                         else
                         {
+                            if (audioSource.isPlaying)
+                                audioSource.Stop();
                             animator.SetInteger("State", 0);
                             moveTime = 0;
                             stayTime = Random.Range(2f, 3f);
@@ -69,18 +80,18 @@ public class Rino : MonoBehaviour, IDamageCheck
                 }
                 else
                 {
+                    audioSource.Stop();
                     moveTime = 0;
                     stayTime = Random.Range(1.5f, 2f);
                     moveLeft = false;
                     isIdle = true;
                     moveDirection *= -1;
 
-                    if (Physics2D.OverlapCircle(transform.position + Vector3.Normalize(moveDirection) * 1.5f, 0.5f, LayerMask.NameToLayer("Ground")) == true)
+                    if (Physics2D.OverlapCircle(overlapPOs.position, 0.17f, LayerMask.NameToLayer("Ground")) == true)
                     {
-                        isWallHit = true;
                         if (hasTarget)
                         {
-                            rb.constraints = RigidbodyConstraints2D.None;
+                            audioSource.PlayOneShot(bam);
                             rb.AddForce(new Vector2(650f, 13000f));
                             animator.SetInteger("State", 2);
                         }
@@ -100,18 +111,25 @@ public class Rino : MonoBehaviour, IDamageCheck
                 if (transform.localPosition.x < rightPointX)
                 {
                     moveTime += Time.fixedDeltaTime;
+
                     if (hasTarget)
                     {
+                        if (!audioSource.isPlaying)
+                            audioSource.Play();
                         transform.position += moveDirection * curve.Evaluate(moveTime) * Time.fixedDeltaTime;
                     }
                     else
                     {
-                        if (moveTime < 2)
+                        if (moveTime < 2.2f)
                         {
+                            if (!audioSource.isPlaying)
+                                audioSource.Play();
                             transform.position += moveDirection * 0.1f * Time.fixedDeltaTime;
                         }
                         else
                         {
+                            if (audioSource.isPlaying)
+                                audioSource.Stop();
                             animator.SetInteger("State", 0);
                             moveTime = 0;
                             stayTime = Random.Range(2f, 3f);
@@ -122,6 +140,7 @@ public class Rino : MonoBehaviour, IDamageCheck
                 }
                 else
                 {
+                    audioSource.Stop();
                     moveTime = 0;
                     stayTime = Random.Range(1.5f, 2f);
                     moveLeft = true;
@@ -129,10 +148,9 @@ public class Rino : MonoBehaviour, IDamageCheck
                     moveDirection *= -1;
 
 
-                    if (Physics2D.OverlapCircle(overlapPOs.position, 0.2f, LayerMask.NameToLayer("Ground")) == true)
+                    if (Physics2D.OverlapCircle(overlapPOs.position, 0.17f, LayerMask.NameToLayer("Ground")) == true)
                     {
-                        isWallHit = true;
-                        rb.constraints = RigidbodyConstraints2D.None;
+                        audioSource.PlayOneShot(bam);
                         rb.AddForce(new Vector2(650f, 13000f));
                         animator.SetInteger("State", 2);
                     }
@@ -159,33 +177,39 @@ public class Rino : MonoBehaviour, IDamageCheck
                 {
                     transform.eulerAngles = new Vector3(0, 180, 0);
                 }
-                isWallHit = false;
+
+                if(stopPursuit == true)
+                {
+                    hasTarget = false;
+                    stopPursuit = false;
+                    audioSource.clip = walk;
+                }
+
                 isIdle = false;
                 animator.SetInteger("State", 1);
-                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
             }
         }
     }
 
     IEnumerator KillRinoCoroutine()
     {
+        audioSource.Stop();
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         stayTime = 4f;
         isDie = true;
         isIdle = true;
         animator.SetInteger("State", 3);
         GetComponent<CapsuleCollider2D>().enabled = false;
-        rb.constraints = RigidbodyConstraints2D.None;
         rb.AddForce(new Vector2(Random.Range(-3000, 3000), 12000f));
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
-
     }
 
     public float CheckForDamage(Vector3 playerPosition)
     {
         if (playerPosition.y > transform.position.y + 0.275f)
         {
-            if (stayTime <= 0.25)
+            if (stayTime <= 1.35f)
             {
                 StartCoroutine(KillRinoCoroutine());
             }
@@ -218,7 +242,7 @@ public class Rino : MonoBehaviour, IDamageCheck
                     return 0;
                 }
             }
-            return 0;
+            return 10;
         }
     }
 }

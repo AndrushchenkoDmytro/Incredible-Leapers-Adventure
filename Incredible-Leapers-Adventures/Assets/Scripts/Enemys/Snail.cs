@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Snail : MonoBehaviour, IDamageCheck
 {
+    
     [SerializeField] private Vector3 moveDirection = Vector3.left;
     [SerializeField]private bool isSnail = true;
     [SerializeField]private bool moveLeft = true;
@@ -14,12 +15,15 @@ public class Snail : MonoBehaviour, IDamageCheck
     private bool isDamage = false;
     [SerializeField] private Vector3 leftPoint = Vector3.zero;
     [SerializeField] private Vector3 rightPoint = Vector3.zero;
+    [SerializeField] private AudioClip runClip;
     private Animator animator;
     private Rigidbody2D rb;
     private GameObject snail;
+    private AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         snail = transform.GetChild(0).gameObject;
@@ -40,6 +44,7 @@ public class Snail : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Play();
                         animator.SetInteger("State",0);
                         moveLeft = false;
                         moveTime = 0;
@@ -56,6 +61,7 @@ public class Snail : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Play();
                         animator.SetInteger("State", 0);
                         moveLeft = true;
                         moveTime = 0;
@@ -92,6 +98,7 @@ public class Snail : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Play();
                         animator.SetInteger("State", 3);
                         moveLeft = false;
                         moveDirection *= -1;
@@ -107,6 +114,7 @@ public class Snail : MonoBehaviour, IDamageCheck
                     }
                     else
                     {
+                        audioSource.Play();
                         animator.SetInteger("State", 3);
                         moveLeft = true;
                         moveDirection *= -1;
@@ -131,6 +139,8 @@ public class Snail : MonoBehaviour, IDamageCheck
 
     IEnumerator KillSnail()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
+        audioSource.clip = runClip;
         snail.SetActive(true);
         Rigidbody2D snailRB = snail.GetComponent<Rigidbody2D>();
         snailRB.AddForce(new Vector2(moveDirection.x * 0.25f, 300f));
@@ -142,6 +152,8 @@ public class Snail : MonoBehaviour, IDamageCheck
 
     IEnumerator KillShell()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
+        audioSource.enabled = false;
         isShell = false;
         animator.SetInteger("State", 4);
         GetComponent<CircleCollider2D>().enabled = false;

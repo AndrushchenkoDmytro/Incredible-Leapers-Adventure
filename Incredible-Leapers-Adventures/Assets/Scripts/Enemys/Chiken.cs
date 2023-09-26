@@ -82,9 +82,11 @@ public class Chiken : MonoBehaviour, IDamageCheck
 
     IEnumerator KillChiken()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         isIdle = false;
         animator.SetInteger("State", 2);
         GetComponent<CompositeCollider2D>().isTrigger = true;
+        GetComponent<AudioSource>().enabled = false;
         rb.AddForce(new Vector2(Random.Range(-350f, 350f), 2000f));
         yield return new WaitForSeconds(0.8f);
         animator.SetInteger("State", 1);

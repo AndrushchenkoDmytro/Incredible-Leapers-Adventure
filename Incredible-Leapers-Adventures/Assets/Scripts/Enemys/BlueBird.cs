@@ -8,16 +8,22 @@ public class BlueBird : MonoBehaviour, IDamageCheck
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip kar;
+    private float karTime;
     private bool moveLeft = true;
     [SerializeField] private float leftPoint;
     [SerializeField] private float rightPoint;
     [SerializeField] Vector3 moveDirection = Vector3.zero;
+    
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        karTime = Random.Range(4, 7f);
     }
 
     private void FixedUpdate()
@@ -47,6 +53,16 @@ public class BlueBird : MonoBehaviour, IDamageCheck
                 spriteRenderer.flipX = false;
             }
         }
+
+        if(karTime > 0)
+        {
+            karTime -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            karTime = Random.Range(4, 7f);
+            audioSource.PlayOneShot(kar,3);
+        }
     }
 
     public float CheckForDamage(Vector3 playerPosition)
@@ -64,6 +80,11 @@ public class BlueBird : MonoBehaviour, IDamageCheck
 
     IEnumerator KIllBird()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
+        audioSource.Stop();
+        audioSource.pitch = 1.25f;
+        audioSource.PlayOneShot(kar, 6);
+        karTime = 10f;
         moveDirection = Vector3.zero;
         animator.SetInteger("State", 1);
         rb.constraints = RigidbodyConstraints2D.None;

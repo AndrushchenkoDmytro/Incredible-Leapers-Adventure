@@ -9,9 +9,11 @@ public class Fan : MonoBehaviour
     private ParticleSystem fanParticles;
     private ParticleSystem.MainModule fanParticlesMain;
     private BoxCollider2D fanCollider;
-    private bool isActive = true;
-    private float workTime = 3;
-    private float sleepTime = 2;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private bool isActive = true;
+    [SerializeField] private float workTime = 4;
+    [SerializeField] private float sleepTime = 2;
+    [SerializeField] private bool blowUp = true;
     private float currentTime = 0;
 
     private void Awake()
@@ -33,6 +35,8 @@ public class Fan : MonoBehaviour
                 isActive = false;
                 animator.SetBool("isActive", isActive);
                 currentTime = 0;
+                if (audioSource.isPlaying)
+                audioSource.Stop();
             }
             else
             {
@@ -49,6 +53,8 @@ public class Fan : MonoBehaviour
                 isActive = true;
                 animator.SetBool("isActive", isActive);
                 currentTime = 0;
+                if(!audioSource.isPlaying)
+                audioSource.Play();
             }
             else
             {
@@ -63,7 +69,7 @@ public class Fan : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().isFly = true;
+            collision.gameObject.GetComponent<PlayerController>().SetFly(true,blowUp);
         }
     }
 
@@ -71,7 +77,7 @@ public class Fan : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().isFly = false;
+            collision.gameObject.GetComponent<PlayerController>().SetFly(false, blowUp);
         }
     }
 

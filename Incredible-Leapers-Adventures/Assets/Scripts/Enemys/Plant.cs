@@ -4,6 +4,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour, IDamageCheck
 {
     [SerializeField] private GameObject peaBullet;
+    [SerializeField] private AudioClip shoot;
     [SerializeField] private Transform spawnPos;
     [SerializeField] private float reloadTime;
     private float currentTime = 0;
@@ -15,6 +16,7 @@ public class Plant : MonoBehaviour, IDamageCheck
     private CapsuleCollider2D capsuleCollider;
     private BoxCollider2D boxCollider2D;
     private Animator animator;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -24,6 +26,7 @@ public class Plant : MonoBehaviour, IDamageCheck
         boxRB = transform.GetChild(0).GetComponent<Rigidbody2D>();
         boxCollider2D = transform.GetChild(0).GetComponent<BoxCollider2D>();
         animator = transform.GetChild(0).GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -51,6 +54,7 @@ public class Plant : MonoBehaviour, IDamageCheck
             if(currentTime > reloadTime)
             {
                 Instantiate(peaBullet, spawnPos.position, transform.rotation);
+                audioSource.Play();
                 currentTime = 0;
                 readyToAttack = false;
                 animator.SetBool("readyToAttack", false);
@@ -71,15 +75,17 @@ public class Plant : MonoBehaviour, IDamageCheck
     IEnumerator KillPlant()
     {
         isAttack = false;
+        audioSource.Stop();
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         capsuleCollider.enabled = false;
         boxCollider2D.enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
         boxRB.simulated = false;
         capsuleRB.bodyType = RigidbodyType2D.Dynamic;
         capsuleRB.AddForce(new Vector2(Random.Range(-75, 75), 300f));
         animator.SetBool("isHit", true);
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

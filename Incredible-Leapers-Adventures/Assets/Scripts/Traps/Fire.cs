@@ -4,15 +4,23 @@ public class Fire : MonoBehaviour
 {
     private Animator animator;
     private BoxCollider2D fireCollider;
-    private bool isActive = true;
-    private float workTime = 3;
-    private float sleepTime = 2;
+    private AudioSource audioSource;
+    [SerializeField] private bool isActive = true;
+    [SerializeField] private float workTime = 3;
+    [SerializeField] private float sleepTime = 2;
     private float currentTime = 0;
-
+    [SerializeField] private AudioClip fire;
+ 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         fireCollider = GetComponent<BoxCollider2D>();
+        audioSource = GetComponentInParent<AudioSource>();
+        if(isActive == false)
+        {
+            animator.SetBool("isActive", false);
+        }
+
     }
 
     private void FixedUpdate()
@@ -25,6 +33,7 @@ public class Fire : MonoBehaviour
                 isActive = false;
                 animator.SetBool("isActive", isActive);
                 currentTime = 0;
+                audioSource.Stop();
             }
             else
             {
@@ -39,6 +48,7 @@ public class Fire : MonoBehaviour
                 isActive = true;
                 animator.SetBool("isActive", isActive);
                 currentTime = 0;
+                audioSource.PlayOneShot(fire);
             }
             else
             {

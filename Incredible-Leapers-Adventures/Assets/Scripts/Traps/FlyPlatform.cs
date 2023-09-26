@@ -8,15 +8,16 @@ public class FlyPlatform : MonoBehaviour
 {
     private Vector3 startPosition;
     private Vector3 endPosition;
-    private float yDelta = 0.5f;
-    private float fallTime = 0;
-    private float rotationDirection = 0;
+    [SerializeField] private float yDelta = 1f;
 
     private bool canFly = true;
     private bool goUp = true;
 
 
     private Rigidbody2D rb;
+    private TrapZone trapZone;
+    [SerializeField] private AudioClip fall;
+    [SerializeField] private AudioClip bam;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class FlyPlatform : MonoBehaviour
         endPosition = startPosition;
         endPosition.y += yDelta;
         rb = GetComponent<Rigidbody2D>();
+        trapZone = GetComponentInParent<TrapZone>();
     }
 
     private void FixedUpdate()
@@ -56,47 +58,35 @@ public class FlyPlatform : MonoBehaviour
             }
 
         }
-        else
-        {
-            transform.position = Vector3.Lerp(startPosition, endPosition, fallTime);
-            float scale = Mathf.Lerp(1f, 0.25f, fallTime);
-            transform.localScale = new Vector3(scale,scale,scale);
-            rb.MoveRotation(rb.rotation + 5 );
-            fallTime += Time.fixedDeltaTime;
-        }
     }
 
     private void DestroyPlatform()
     {
+        trapZone.RemoveChild();
         Destroy(gameObject);
     }
     private void FallPlatform()
     {
-        yDelta = 3;
-        transform.position += new Vector3(0, 0, 0.25f);
-        startPosition = transform.position;
-        endPosition.y -= yDelta;
-        endPosition.z = 1.75f;
-        rotationDirection = Random.Range(0, 2);
-        if (rotationDirection == 0)
-        {
-            rotationDirection = Random.Range(5f, 7f);
-        }
-        else
-        {
-            rotationDirection = -Random.Range(5f, 7f);
-        }
-        canFly = false;
+        AudioManager.Instance.PlayAudioEffect(fall,0.7f);
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.freezeRotation = false;
-        transform.GetChild(0).gameObject.SetActive(false);
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.gravityScale = 3f;
+        GetComponent<BoxCollider2D>().enabled = false;
+        rb.angularVelocity = Random.Range(60f, 160f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            Invoke("FallPlatform", 0.5f);
-            Invoke("DestroyPlatform", 2f);
+            if (canFly)
+            {
+                canFly = false;
+                AudioManager.Instance.PlayAudioEffect(bam,0.75f);
+                Invoke("FallPlatform", 0.55f);
+                Invoke("DestroyPlatform", 2f);
+            }
         }
     }
 

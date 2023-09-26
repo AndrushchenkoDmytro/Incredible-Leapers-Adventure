@@ -11,6 +11,8 @@ public class Chameleon : MonoBehaviour, IDamageCheck
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
     private CapsuleCollider2D capsuleCollider2D;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip attack;
 
     [SerializeField] private bool isMove = true;
     private bool canMove = true;
@@ -19,9 +21,9 @@ public class Chameleon : MonoBehaviour, IDamageCheck
     [SerializeField] private float leftPoint = 0;
     [SerializeField] private float rightPoint = 0;
 
-    [SerializeField] private int attackFrame = -1;
+    private int attackFrame = -1;
     private bool isAttack = false;
-    private float attackTime = 0.3f;
+
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class Chameleon : MonoBehaviour, IDamageCheck
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         boxCollider2D.enabled = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -76,10 +79,11 @@ public class Chameleon : MonoBehaviour, IDamageCheck
                     animator.SetInteger("State", 0);
                     isAttack = false;
                 }
-                Debug.Log("attackTime < 5");
+  
             }
             else if (attackFrame == 16f)
             {
+                audioSource.PlayOneShot(attack,2);
                 boxCollider2D.enabled = true;
                 capsuleCollider2D.offset = new Vector2(0.3f, -0.1254258f);
 
@@ -98,29 +102,70 @@ public class Chameleon : MonoBehaviour, IDamageCheck
 
     IEnumerator KillChameleon()
     {
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
+        audioSource.enabled = false;
         isAttack = false;
         isMove = false;
         animator.SetInteger("State", 2);
         rb.freezeRotation = false;
         boxCollider2D.enabled = false;
         capsuleCollider2D.enabled = false;
-        rb.AddForce(new Vector2(Random.Range(-150f, 150f), Random.Range(150f, 250f)));
-        rb.angularVelocity = Random.Range(20f, 120f);
+        rb.AddForce(new Vector2(Random.Range(-170f, 170f), Random.Range(250f, 400f)));
+        rb.angularVelocity = Random.Range(40f, 160f);
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 
     public float CheckForDamage(Vector3 playerPosition)
     {
-        if(Mathf.Abs(transform.position.x - playerPosition.x) < 0.32f)
+        if (transform.position.x < playerPosition.x)
         {
-            if(transform.position.y + 0.17f < playerPosition.y)
+            if (moveLeft)
             {
-                StartCoroutine(KillChameleon());
-                return 0;
+                if (transform.position.y + 0.17f < playerPosition.y)
+                {
+                    StartCoroutine(KillChameleon());
+                    return 0;
+                }
+                return 10;
+            }
+            else
+            {
+                if (Mathf.Abs(playerPosition.x - transform.position.x) < 0.34f)
+                {
+                    if (transform.position.y + 0.17f < playerPosition.y)
+                    {
+                        StartCoroutine(KillChameleon());
+                        return 0;
+                    }
+                }
+                return 10;
             }
         }
-        return 10f;
+        else
+        {
+            if (moveLeft)
+            {
+                if (Mathf.Abs(transform.position.x - playerPosition.x) < 0.34f)
+                {
+                    if (transform.position.y + 0.17f < playerPosition.y)
+                    {
+                        StartCoroutine(KillChameleon());
+                        return 0;
+                    }
+                }
+                return 10;
+            }
+            else
+            {
+                if (transform.position.y + 0.17f < playerPosition.y)
+                {
+                    StartCoroutine(KillChameleon());
+                    return 0;
+                }
+                return 10;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -128,6 +173,7 @@ public class Chameleon : MonoBehaviour, IDamageCheck
         if (collision.tag == "Player")
         {
             Debug.Log("PlayerEnter");
+            audioSource.Stop();
             animator.SetInteger("State", 1);
             isMove = false;
             canMove = false;
@@ -139,6 +185,7 @@ public class Chameleon : MonoBehaviour, IDamageCheck
     {
         if (collision.tag == "Player")
         {
+            audioSource.Play();
             canMove = true;
         }
     }

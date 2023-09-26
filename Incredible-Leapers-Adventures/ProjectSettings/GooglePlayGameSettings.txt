@@ -1,0 +1,11 @@
+lastUpgrade=01101
+proj.pluginVersion=0.11.01
+proj.AppId=482389903195
+and.BundleId=com.TorioNyx_Games.IncredibleLeapersAdventures
+proj.classDir=Assets
+proj.ConstantsClassName=GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e482389903195%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.TorioNyx_Games.IncredibleLeapersAdventures%3c%2fstring%3e%0d%0a++%3c%21--achievement+Achievement+Enthusiast--%3e%0d%0a++%3cstring+name%3d%22achievement_achievement_enthusiast%22+translatable%3d%22false%22%3eCgkI2463hYUOEAIQBQ%3c%2fstring%3e%0d%0a++%3c%21--achievement+Junior+Wanderer--%3e%0d%0a++%3cstring+name%3d%22achievement_junior_wanderer%22+translatable%3d%22false%22%3eCgkI2463hYUOEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--achievement+Middle+Wanderer--%3e%0d%0a++%3cstring+name%3d%22achievement_middle_wanderer%22+translatable%3d%22false%22%3eCgkI2463hYUOEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--achievement+Senior+Wanderer--%3e%0d%0a++%3cstring+name%3d%22achievement_senior_wanderer%22+translatable%3d%22false%22%3eCgkI2463hYUOEAIQBA%3c%2fstring%3e%0d%0a++%3c%21--achievement+From+scratch+(Is+this+playable%3f%21)--%3e%0d%0a++%3cstring+name%3d%22achievement_from_scratch_is_this_playable%22+translatable%3d%22false%22%3eCgkI2463hYUOEAIQBg%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=482389903195-3vslauolj57qvobshhle63s945tbnk3v.apps.googleusercontent.com
+android.SetupDone=true
+App.NearbdServiceId=
+android.NearbySetupDone=true

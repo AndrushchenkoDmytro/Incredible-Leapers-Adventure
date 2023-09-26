@@ -11,6 +11,7 @@ public class SpikeBall : MonoBehaviour
     private bool isTrajectoryCircle = false;
     [SerializeField] private bool isClockWise = false;
     private Vector2 throwDirection;
+    private AudioSource audioSource;
 
 
     private void Awake()
@@ -19,6 +20,7 @@ public class SpikeBall : MonoBehaviour
         {
             isTrajectoryCircle = true;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -35,6 +37,7 @@ public class SpikeBall : MonoBehaviour
                 else
                 {
                     isClockWise = false;
+                    audioSource.Play();
                 }
             }
             else
@@ -47,6 +50,7 @@ public class SpikeBall : MonoBehaviour
                 else
                 {
                     isClockWise = true;
+                    audioSource.Play();
                 }
             }
         }
@@ -62,22 +66,22 @@ public class SpikeBall : MonoBehaviour
             {
                 if(transform.position.x < collision.transform.position.x)
                 {
-                    throwDirection = new Vector2(800, 350);
+                    throwDirection = new Vector2(400, 250);
                 }
                 else
                 {
-                    throwDirection = new Vector2(-200, 150);
+                    throwDirection = new Vector2(-100, 150);
                 }
             }
             else
             {
                 if (transform.position.x > collision.transform.position.x)
                 {
-                    throwDirection = new Vector2(-800, 350);
+                    throwDirection = new Vector2(-400, 250);
                 }
                 else
                 {
-                    throwDirection = new Vector2(200, 150);
+                    throwDirection = new Vector2(100, 150);
                 }
             }
             playerController.ThrowCharacter(throwDirection);

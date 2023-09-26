@@ -5,6 +5,8 @@ using UnityEngine;
 public class RinoZone : MonoBehaviour
 {
     private Rino rino;
+    [SerializeField] private AudioClip run;
+
 
     private void Awake()
     {
@@ -15,7 +17,10 @@ public class RinoZone : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            
             rino.hasTarget = true;
+            rino.stopPursuit = false;
+            rino.audioSource.clip = run;
             rino.stayTime = 0;
             rino.moveTime = 0.1f;
         }
@@ -25,7 +30,7 @@ public class RinoZone : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            rino.hasTarget = false;
+            rino.stopPursuit = true;
         }
     }
 }
