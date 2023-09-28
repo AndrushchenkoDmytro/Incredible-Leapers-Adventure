@@ -6,7 +6,8 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private bool moveUp = true;
     [SerializeField] private float moveDistance = 2;
-    [SerializeField] private float t = 0;
+    [SerializeField] private float speed = 1;
+    private float t = 0;
     private Vector3 startPosition = Vector3.zero;
     private Vector3 endPosition = Vector3.zero;
     [SerializeField] DoorButton doorButton;
@@ -37,7 +38,7 @@ public class Door : MonoBehaviour
             while (transform.localPosition.y < endPosition.y)
             {
                 transform.localPosition = Vector3.Lerp(startPosition, endPosition, t);
-                t += Time.deltaTime;
+                t += Time.deltaTime * speed;
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -47,7 +48,7 @@ public class Door : MonoBehaviour
             while (transform.localPosition.y > endPosition.y)
             {
                 transform.localPosition = Vector3.Lerp(endPosition, startPosition, t);
-                t -= Time.deltaTime;
+                t -= Time.deltaTime * speed;
                 yield return new WaitForFixedUpdate();
             }
         }

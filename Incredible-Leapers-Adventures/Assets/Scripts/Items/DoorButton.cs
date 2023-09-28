@@ -18,13 +18,28 @@ public class DoorButton : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            animator.Play( ((int)buttonColor).ToString());
-            Invoke("OpenDoor",0.5f);
-            GetComponent<BoxCollider2D>().enabled = false;
-            AudioManager.Instance.PlayAudioEffect(buttonClick, 0.75f);
+            if(animator != null)
+            {
+                animator.Play(((int)buttonColor).ToString());
+                Invoke("OpenDoor", 0.5f);
+                GetComponent<BoxCollider2D>().enabled = false;
+                AudioManager.Instance.PlayAudioEffect(buttonClick, 0.75f);
+            }
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            if (animator == null)
+            {
+                OpenDoor();
+                GetComponent<BoxCollider2D>().enabled = false;
+                AudioManager.Instance.PlayAudioEffect(buttonClick, 0.75f);
+            }
+        }
+    }
     private void OpenDoor()
     {
         OnDoorButtonPressed?.Invoke();

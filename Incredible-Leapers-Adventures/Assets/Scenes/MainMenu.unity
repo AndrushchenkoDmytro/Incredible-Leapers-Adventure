@@ -1586,7 +1586,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 262948852}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -3000,7 +3000,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 506452879}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -3431,7 +3431,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 533264528}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -4473,7 +4473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 754625162}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -5545,7 +5545,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1075128560}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -7264,7 +7264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1464178571}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -7449,7 +7449,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1475932480}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -8495,7 +8495,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1664101705}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -8642,7 +8642,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1680330401}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -8789,7 +8789,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1735981927}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1
@@ -8851,7 +8851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c71d07fe359d043a4b008b60014661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneIndex: 17
+  SceneIndex: 16
   lockSprite: {fileID: 21300000, guid: 0ddcad2c81d6ce74d84ce93a3683a87d, type: 3}
 --- !u!1 &1744891470
 GameObject:
@@ -9630,7 +9630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240029794}
+      - m_Target: {fileID: 1995692526}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 1

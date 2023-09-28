@@ -6,14 +6,14 @@ public class Fruit : MonoBehaviour
 {
     private bool isActive = true;
     private Animator animator;
-    private FruitZone fruitZone;
+    private FruitCounter fruitCounter;
     [SerializeField] private string animationClipName;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         animator.Play(animationClipName);
-        fruitZone = GetComponentInParent<FruitZone>(); 
+        fruitCounter = GetComponentInParent<FruitCounter>(); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,7 +23,7 @@ public class Fruit : MonoBehaviour
             if(isActive == true)
             {
                 animator.Play("Collect");
-                fruitZone.PlayFruitCollectSound();
+                fruitCounter.OnFruitCollect();
                 isActive = false;
                 Invoke("DestroyFruit", 1f);
             }
@@ -34,7 +34,5 @@ public class Fruit : MonoBehaviour
     private void DestroyFruit()
     {
         this.gameObject.SetActive(false);
-    }
-
-    
+    }  
 }

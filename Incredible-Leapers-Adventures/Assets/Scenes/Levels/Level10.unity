@@ -1161,7 +1161,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &102245345
 Transform:
@@ -6434,7 +6434,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &235920707
 Transform:
@@ -12090,6 +12090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412fcda09f553840af920d3c10f5361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForce: {x: 0, y: 950}
 --- !u!82 &395682429
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13253,7 +13254,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &517552594
 Transform:
@@ -18197,7 +18198,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.080797, y: 2.6399999, z: -4}
+  m_LocalPosition: {x: -8.076322, y: 2.6399999, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27833,7 +27834,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &900344019
 Transform:
@@ -30750,7 +30751,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1279471305
 Transform:
@@ -35739,7 +35740,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1340915582
 Transform:
@@ -35998,7 +35999,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1408348051
 Transform:
@@ -36790,7 +36791,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1615490942
 Transform:
@@ -37015,6 +37016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412fcda09f553840af920d3c10f5361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForce: {x: 0, y: 950}
 --- !u!82 &1645655929
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39795,7 +39797,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1936768360
 Transform:

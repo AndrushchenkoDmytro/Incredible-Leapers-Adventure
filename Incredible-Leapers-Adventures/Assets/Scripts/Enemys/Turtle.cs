@@ -9,8 +9,8 @@ public class Turtle : MonoBehaviour, IDamageCheck
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private int state = 0;
-    private float spikesTime = 2.1f;
-    private float turtleTime = 1.4f;
+    [SerializeField] private float spikesTime = 2.1f;
+    [SerializeField] private float turtleTime = 1.4f;
     private float animTransitionTime = 0.4f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private bool isSpikesOut = true;

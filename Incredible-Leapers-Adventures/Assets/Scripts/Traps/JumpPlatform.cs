@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class JumpPlatform : MonoBehaviour
 {
     Animator animator;
     AudioSource audioSource;
+    [SerializeField] private Vector2 throwForce = Vector2.up * 950;
 
     private void Awake()
     {
@@ -18,7 +20,7 @@ public class JumpPlatform : MonoBehaviour
         if(collision.tag == "Player")
         {
             audioSource.Play();
-            collision.gameObject.GetComponent<PlayerController>().ThrowCharacter(Vector2.up * 950);
+            collision.gameObject.GetComponent<PlayerController>().ThrowCharacter(throwForce);
             Invoke("PlatformPush", 0.04f);
         }
     }
