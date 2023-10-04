@@ -501,6 +501,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag == "Enemy") 
+        {
+            GetDamage(10f);
+            if(transform.position.x > other.transform.position.x)
+            {
+                ThrowCharacter(new Vector2(Random.Range(200f, 350f), Random.Range(200f, 350f)) );
+            }
+            else
+            {
+                ThrowCharacter(new Vector2(-Random.Range(200f, 350f), Random.Range(200f, 350f)));
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);

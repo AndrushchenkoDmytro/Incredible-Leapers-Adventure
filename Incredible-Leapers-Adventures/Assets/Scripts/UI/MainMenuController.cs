@@ -9,9 +9,7 @@ public class MainMenuController : MonoBehaviour
     private Animator animator;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider effectSlider;
-
     [SerializeField] private AudioClip buttonClick;
-
 
     private void Awake()
     {
@@ -39,14 +37,17 @@ public class MainMenuController : MonoBehaviour
 
     public void SaveGame()
     {
+        DataPersistenceManager.Instance.localData.passedLevelsCount = 1;
         DataPersistenceManager.Instance.SaveGame();
     }
 
     public void ToMap()
     {
-        //DataPersistenceManager.Instance.SaveGame();
-        AudioManager.Instance.PlayAudioEffect(buttonClick,1);
-        animator.Play("ToMap");
+        InterstitialAds.Instance.ShowAdd((i) =>
+        {
+            AudioManager.Instance.PlayAudioEffect(buttonClick, 1);
+            animator.Play("ToMap");
+        }, 1);
     }
     public void NewGame()
     {
@@ -56,8 +57,11 @@ public class MainMenuController : MonoBehaviour
 
     public void ToMainMenu()
     {
-        AudioManager.Instance.PlayAudioEffect(buttonClick, 1);
-        animator.Play("ToMainMenu");
+        InterstitialAds.Instance.ShowAdd((i) =>
+        {
+            AudioManager.Instance.PlayAudioEffect(buttonClick, 1);
+            animator.Play("ToMainMenu");
+        }, 1);
     }
 
     public void ShowAchievementsBoard()
@@ -84,8 +88,10 @@ public class MainMenuController : MonoBehaviour
 
     public void CloseSettings()
     {
-        AudioManager.Instance.PlayAudioEffect(buttonClick, 1);
-        animator.Play("CloseSettings");
+        InterstitialAds.Instance.ShowAdd((int i) => {
+            AudioManager.Instance.PlayAudioEffect(buttonClick, 1);
+            animator.Play("CloseSettings");
+        },1);
     }
 
     public void ExitGame()

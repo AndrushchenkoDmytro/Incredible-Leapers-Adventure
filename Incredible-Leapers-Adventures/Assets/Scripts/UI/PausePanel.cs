@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
@@ -10,7 +11,7 @@ public class PausePanel : MonoBehaviour
     [SerializeField] private GameObject progressBar;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject mobileInput;
-    [SerializeField] private int SceneIndex = 2;
+    [SerializeField] private int sceneIndex = 2;
 
     private void Awake()
     {
@@ -40,15 +41,17 @@ public class PausePanel : MonoBehaviour
 
     public void RestartLevel()
     {
-        bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        Time.timeScale = 1;      
-        LevelLoadManager.Instance.LoadScene(SceneIndex);
+        InterstitialAds.Instance.ShowAdd(OnAdWatched,sceneIndex);
     }
 
     public void ExitLevel()
     {
+        InterstitialAds.Instance.ShowAdd(OnAdWatched, 1);
+    }
+
+    public void OnAdWatched(int index)
+    {
         bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        Time.timeScale = 1;
-        LevelLoadManager.Instance.LoadScene(1);
+        LevelLoadManager.Instance.LoadScene(index);
     }
 }

@@ -114,6 +114,7 @@ public class Turtle : MonoBehaviour, IDamageCheck
     {
         isDie = true;
         animator.SetInteger("State", 2);
+        AudioManager.Instance.PlayEnemyDeathAudioEffect();
         rb.constraints = RigidbodyConstraints2D.None;
         rb.freezeRotation = false;
         GetComponent<EdgeCollider2D>().enabled = false;

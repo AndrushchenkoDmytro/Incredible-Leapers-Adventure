@@ -252,7 +252,7 @@ MonoBehaviour:
   progressBar: {fileID: 2029675315}
   pauseMenu: {fileID: 505244018}
   mobileInput: {fileID: 1392716998}
-  SceneIndex: 9
+  sceneIndex: 9
 --- !u!1 &27814479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 0
   moveDistance: -2.4
-  t: 0
+  speed: 1
   doorButton: {fileID: 1214749767}
 --- !u!61 &76717920
 BoxCollider2D:
@@ -2305,6 +2305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a548cff2ea8096c4cb4c67c2c2f9b0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikesTime: 2.1
+  turtleTime: 1.4
   audioSource: {fileID: 193422338}
   isSpikesOut: 1
 --- !u!50 &193422340
@@ -5372,6 +5374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a548cff2ea8096c4cb4c67c2c2f9b0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikesTime: 2.1
+  turtleTime: 1.4
   audioSource: {fileID: 566641138}
   isSpikesOut: 1
 --- !u!50 &566641140
@@ -7726,7 +7730,6 @@ GameObject:
   - component: {fileID: 811564368}
   - component: {fileID: 811564371}
   - component: {fileID: 811564370}
-  - component: {fileID: 811564369}
   m_Layer: 0
   m_Name: down
   m_TagString: Untagged
@@ -7749,22 +7752,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 687022140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &811564369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811564367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3c156c6df2a7a4e95cc0c0881fc536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveUp: 0
-  moveDistance: -2.8
-  t: 0
-  doorButton: {fileID: 0}
 --- !u!61 &811564370
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16573,7 +16560,6 @@ GameObject:
   - component: {fileID: 1096627388}
   - component: {fileID: 1096627391}
   - component: {fileID: 1096627390}
-  - component: {fileID: 1096627389}
   m_Layer: 0
   m_Name: up
   m_TagString: Untagged
@@ -16596,22 +16582,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 687022140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1096627389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096627387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3c156c6df2a7a4e95cc0c0881fc536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveUp: 1
-  moveDistance: 2.9
-  t: 0
-  doorButton: {fileID: 0}
 --- !u!61 &1096627390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18099,7 +18069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 1
   moveDistance: 2.2
-  t: 0
+  speed: 1
   doorButton: {fileID: 1214749767}
 --- !u!61 &1321855291
 BoxCollider2D:
@@ -18458,7 +18428,6 @@ GameObject:
   - component: {fileID: 1419869477}
   - component: {fileID: 1419869480}
   - component: {fileID: 1419869479}
-  - component: {fileID: 1419869478}
   m_Layer: 0
   m_Name: up
   m_TagString: Untagged
@@ -18481,22 +18450,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 713061931}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1419869478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419869476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3c156c6df2a7a4e95cc0c0881fc536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveUp: 1
-  moveDistance: 2.9
-  t: 0
-  doorButton: {fileID: 0}
 --- !u!61 &1419869479
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18605,7 +18558,6 @@ GameObject:
   - component: {fileID: 1436606082}
   - component: {fileID: 1436606085}
   - component: {fileID: 1436606084}
-  - component: {fileID: 1436606083}
   m_Layer: 0
   m_Name: down
   m_TagString: Untagged
@@ -18628,22 +18580,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 713061931}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1436606083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436606081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3c156c6df2a7a4e95cc0c0881fc536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveUp: 0
-  moveDistance: -2.8
-  t: 0
-  doorButton: {fileID: 0}
 --- !u!61 &1436606084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28124,6 +28060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a548cff2ea8096c4cb4c67c2c2f9b0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikesTime: 2.1
+  turtleTime: 1.4
   audioSource: {fileID: 2098345002}
   isSpikesOut: 1
 --- !u!50 &2098345004

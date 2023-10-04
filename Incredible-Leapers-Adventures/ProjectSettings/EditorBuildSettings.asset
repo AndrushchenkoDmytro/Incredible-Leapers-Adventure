@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 1517be39f7c044243b4c42da30bcaa84
   - enabled: 1
     path: Assets/Scenes/Levels/Level1.unity
-    guid: f50b4366356c2cf4f83c75e2029318b7
+    guid: 0c4bc35bac04d2844bf2e2d59b3c46e8
   - enabled: 1
     path: Assets/Scenes/Levels/Level2.unity
     guid: dc60e8c69147a7f46aca1f6205b152d1
@@ -77,6 +77,48 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level22.unity
     guid: 3f8a7a5d7b18c214a8405bc920fb1d9c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level23.unity
+    guid: cfa4c503bf9d59344bb97ea69547caef
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level24.unity
+    guid: 9c12d5b334d27a0408c1e12e7d0b7436
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level25.unity
+    guid: f50b4366356c2cf4f83c75e2029318b7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level26.unity
+    guid: 2f704a8bbe057c449bdf36933fddd601
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level27.unity
+    guid: a9bd9adbe11e89b419875bf07f61d143
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level28.unity
+    guid: 4e446f34eb3e68e4e80a6ee57fd9af5b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level29.unity
+    guid: dfb376214b2b9314c84310dddc365baa
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level30.unity
+    guid: 92ba3caeea8a00140960774593db90a0
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level31.unity
+    guid: 042c826f63595f644888885ff6a04cbf
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level32.unity
+    guid: 8573254c6181a224f84d6f57a99e87df
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level33.unity
+    guid: 775dafc0008cf134e9e932f92fa068bb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level34.unity
+    guid: fd1a515c762f39348a890c9ff466ecde
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level35.unity
+    guid: 7d9da65a20ab9d74ba3a2a6b0fe0e9df
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level36.unity
+    guid: 1ba79b1475a7bf94eaa50c7e26f93a80
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02

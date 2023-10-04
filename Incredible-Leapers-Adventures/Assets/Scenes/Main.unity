@@ -386,6 +386,7 @@ MonoBehaviour:
   progressBar: {fileID: 2029675315}
   pauseMenu: {fileID: 505244018}
   mobileInput: {fileID: 1439643332}
+  SceneIndex: 2
 --- !u!1 &26482359
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,6 +6196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412fcda09f553840af920d3c10f5361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForce: {x: 0, y: 950}
 --- !u!82 &105575793
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13493,7 +13495,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.680017, y: 0.12132001, z: -4}
+  m_LocalPosition: {x: -2.6800086, y: 0.12132001, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13581,11 +13583,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aeae373e8ccb3748b9a32dba5edd945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveHorizontal: 0
+  moveSpeed: 2
   startPoint: {x: 18, y: -4, z: 0}
   endPoint: {x: 24, y: -4, z: 0}
-  moveSpeed: 2
-  moveDirection: {x: 0, y: 0, z: 0}
-  isHorizontal: 1
   stopTime: 2
 --- !u!58 &534712408
 CircleCollider2D:
@@ -14379,7 +14380,7 @@ TilemapRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 1.65625, y: 0.421875, z: 0}
+  m_ChunkCullingBounds: {x: 0.9375, y: 0.11458331, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -15233,6 +15234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca4a01c1d4c8fa409ee190813584e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 1
+  workTime: 3
+  sleepTime: 2
   fire: {fileID: 8300000, guid: 34d185635499be44a8479f8ea2e81b5a, type: 3}
 --- !u!61 &642111374
 BoxCollider2D:
@@ -16218,7 +16222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &738004063
 Transform:
   m_ObjectHideFlags: 0
@@ -16424,6 +16428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c0380a72869a84592674bcdbab0abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yDelta: 1
   fall: {fileID: 8300000, guid: 97d99c0e025a31545993d8559164f22c, type: 3}
   bam: {fileID: 8300000, guid: 06453a481609a91479dde5534dc9f417, type: 3}
 --- !u!61 &762239979
@@ -17062,10 +17067,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ab9da2b6ee50f4cbd4338b1465b199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateDirection: {x: 0, y: 0, z: 100}
-  rotateAngle: 80
-  currentAngle: 80
-  isClockWise: 1
+  rotationSpeed: 5
+  minRotationAngle: -90
+  maxRotationAngle: 90
+  fullRotation: 0
+  throwForce: 500
+  clip: {fileID: 0}
 --- !u!58 &793563840
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19978,6 +19985,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaba7152c3d311642a2e17a4d387d489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  isActive: 1
+  workTime: 4
+  sleepTime: 2
+  blowUp: 1
 --- !u!82 &1112661740
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20239,6 +20251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c0380a72869a84592674bcdbab0abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yDelta: 1
   fall: {fileID: 8300000, guid: 97d99c0e025a31545993d8559164f22c, type: 3}
   bam: {fileID: 8300000, guid: 06453a481609a91479dde5534dc9f417, type: 3}
 --- !u!50 &1180652593
@@ -26149,6 +26162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a548cff2ea8096c4cb4c67c2c2f9b0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikesTime: 2.1
+  turtleTime: 1.4
   audioSource: {fileID: 1414279494}
   isSpikesOut: 1
 --- !u!50 &1414279490
@@ -27265,7 +27280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2347e182ec3b37408346afcab6e97c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collect: {fileID: 8300000, guid: 41a4b41b8d7ee3749916fe21b80b44b6, type: 3}
 --- !u!1 &1615114976
 GameObject:
   m_ObjectHideFlags: 0
@@ -38690,7 +38704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1760466660
 Transform:
   m_ObjectHideFlags: 0
@@ -38864,7 +38878,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760466659}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6483186666857712472, guid: 6ca60b70e8403514a95466a5a02c3874, type: 2}
   m_audioClip: {fileID: 8300000, guid: 02a22faa7d41e9548bec540f22bf0eb8, type: 3}
@@ -38878,7 +38892,7 @@ AudioSource:
   Priority: 126
   DopplerLevel: 1
   MinDistance: 7
-  MaxDistance: 10
+  MaxDistance: 9
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -38888,22 +38902,22 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.8168518
-      value: 0.35783768
-      inSlope: 0
-      outSlope: 0
+      time: 0.4848358
+      value: 0.3504982
+      inSlope: -1.3548788
+      outSlope: -1.3548788
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.3037229
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -3.3333333
-      outSlope: -3.3333333
+      inSlope: -1.8299414
+      outSlope: -1.8299414
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.18607415
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

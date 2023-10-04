@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 0
   moveDistance: -2.8
-  t: 0
+  speed: 1
   doorButton: {fileID: 391033117}
 --- !u!61 &7172867
 BoxCollider2D:
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 0
   moveDistance: -2.4
-  t: 0
+  speed: 1
   doorButton: {fileID: 1034630020}
 --- !u!61 &146087869
 BoxCollider2D:
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   progressBar: {fileID: 1948080248}
   pauseMenu: {fileID: 1387713564}
   mobileInput: {fileID: 591617151}
-  SceneIndex: 6
+  sceneIndex: 6
 --- !u!224 &177043334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3610,7 +3610,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.944984, y: -0.18369007, z: -4}
+  m_LocalPosition: {x: -8.943899, y: -0.18369007, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6150,7 +6150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 0
   moveDistance: -2.88
-  t: 0
+  speed: 1
   doorButton: {fileID: 1607932625}
 --- !u!61 &801573588
 BoxCollider2D:
@@ -15188,7 +15188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 1
   moveDistance: 2.9
-  t: 0
+  speed: 1
   doorButton: {fileID: 391033117}
 --- !u!61 &1077120953
 BoxCollider2D:
@@ -18101,7 +18101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 1
   moveDistance: 2.2
-  t: 0
+  speed: 1
   doorButton: {fileID: 1034630020}
 --- !u!61 &1775136318
 BoxCollider2D:
@@ -18610,7 +18610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveUp: 1
   moveDistance: 2.9
-  t: 0
+  speed: 1
   doorButton: {fileID: 1607932625}
 --- !u!61 &1820158946
 BoxCollider2D:

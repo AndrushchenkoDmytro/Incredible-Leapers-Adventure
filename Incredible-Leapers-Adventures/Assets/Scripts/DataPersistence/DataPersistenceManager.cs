@@ -15,11 +15,8 @@ public class DataPersistenceManager : MonoBehaviour
     private IDataFileHandler cloudDataFileHandler = new GPGS_CloudDataFileHandler();
     private IDataFileHandler localDataFileHandler = new Local_DataFileHandler();
 
-    public GameData localData = new GameData();
+    [SerializeField] public GameData localData = new GameData();
     private GameData cloudData = new GameData();
-
-    //private List<ILoadDataObject> loadDataObjects = new List<ILoadDataObject>();
-    private List<ISaveDataObject> saveDataObjects = new List<ISaveDataObject>();
 
     public Action OnGameDataReload;
 
@@ -109,11 +106,6 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
-        foreach (ISaveDataObject dataSaveObjcet in saveDataObjects)
-        {
-            dataSaveObjcet.SaveData(ref localData);
-        }
-        localData.passedLevelsCount += 2;
         string saveData = JsonUtility.ToJson(localData);
 
         localDataFileHandler.SaveData(saveName, saveData);
@@ -137,31 +129,6 @@ public class DataPersistenceManager : MonoBehaviour
             });
         }
     }
-
-    /*public void AddILoadDataPersistence(ILoadDataObject loadObject)
-    {
-        if (!loadDataObjects.Contains(loadObject))
-            loadDataObjects.Add(loadObject);
-    }
-
-    public void RemoveILoadDataPersistence(ILoadDataObject loadObject)
-    {
-        if (loadDataObjects.Contains(loadObject))
-            loadDataObjects.Remove(loadObject);
-    }*/
-
-    public void AddISaveDataPersistence(ISaveDataObject saveObject)
-    {
-        if (!saveDataObjects.Contains(saveObject))
-            saveDataObjects.Add(saveObject);
-    }
-
-    public void RemoveISaveDataPersistence(ISaveDataObject saveObject)
-    {
-        if (saveDataObjects.Contains(saveObject))
-            saveDataObjects.Remove(saveObject);
-    }
-
     private void OnApplicationQuit()
     {
 

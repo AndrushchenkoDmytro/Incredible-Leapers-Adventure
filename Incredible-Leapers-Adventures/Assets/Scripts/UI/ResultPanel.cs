@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 public class ResultPanel : MonoBehaviour
 {
-    [SerializeField] private int levelIndex = 2;
+    [SerializeField] private int sceneIndex = 2;
     [SerializeField] private GameObject bgPanel;
     [SerializeField] private FinishPoint finishPoint;
     [SerializeField] private GameObject mobileInput;
@@ -30,6 +32,11 @@ public class ResultPanel : MonoBehaviour
         pauseButon.SetActive(false);
         bgPanel.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(true);
+        if (sceneIndex > DataPersistenceManager.Instance.localData.passedLevelsCount)
+        {
+            DataPersistenceManager.Instance.localData.passedLevelsCount++;
+            DataPersistenceManager.Instance.SaveGame();
+        }
     }
 
     public void ShowLosePanel()
@@ -43,19 +50,22 @@ public class ResultPanel : MonoBehaviour
 
     public void NextLevel()
     {
-        bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        LevelLoadManager.Instance.LoadScene(levelIndex+1);
+        InterstitialAds.Instance.ShowAdd(OnAdWatched, sceneIndex);
     }
 
     public void Restart()
     {
-        bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        LevelLoadManager.Instance.LoadScene(levelIndex);
+        InterstitialAds.Instance.ShowAdd(OnAdWatched, sceneIndex);
     }
 
     public void ToMainMenu()
     {
+        InterstitialAds.Instance.ShowAdd(OnAdWatched,1);
+    }
+
+    public void OnAdWatched(int index)
+    {
         bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        LevelLoadManager.Instance.LoadScene(1);
+        LevelLoadManager.Instance.LoadScene(index);
     }
 }

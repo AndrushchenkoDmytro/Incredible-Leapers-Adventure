@@ -61,7 +61,7 @@ public class BlueBird : MonoBehaviour, IDamageCheck
         else
         {
             karTime = Random.Range(4, 7f);
-            audioSource.PlayOneShot(kar,3);
+            audioSource.PlayOneShot(kar,4.5f);
         }
     }
 
@@ -83,7 +83,7 @@ public class BlueBird : MonoBehaviour, IDamageCheck
         AudioManager.Instance.PlayEnemyDeathAudioEffect();
         audioSource.Stop();
         audioSource.pitch = 1.25f;
-        audioSource.PlayOneShot(kar, 6);
+        audioSource.PlayOneShot(kar, 7);
         karTime = 10f;
         moveDirection = Vector3.zero;
         animator.SetInteger("State", 1);

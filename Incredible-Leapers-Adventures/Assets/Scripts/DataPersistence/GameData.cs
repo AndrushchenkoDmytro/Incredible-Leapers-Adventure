@@ -1,9 +1,9 @@
 public class GameData
 {
-    public int passedLevelsCount = 0;
+    public int passedLevelsCount = 1;
 
     public GameData()
     {
-        passedLevelsCount = 0;
+        passedLevelsCount = 1;
     }
 }
