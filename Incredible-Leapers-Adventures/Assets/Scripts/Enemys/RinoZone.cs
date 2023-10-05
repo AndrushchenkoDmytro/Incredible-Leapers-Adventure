@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RinoZone : MonoBehaviour
 {
     private Rino rino;
     [SerializeField] private AudioClip run;
-
 
     private void Awake()
     {
@@ -16,8 +13,7 @@ public class RinoZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
-        {
-            
+        {         
             rino.hasTarget = true;
             rino.stopPursuit = false;
             rino.audioSource.clip = run;

@@ -1,11 +1,6 @@
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 public class GPGSManager : MonoBehaviour

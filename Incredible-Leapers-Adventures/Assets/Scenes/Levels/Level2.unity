@@ -13406,7 +13406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 3
+  sceneIndex: 3
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}

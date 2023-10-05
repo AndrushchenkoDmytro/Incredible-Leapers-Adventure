@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // [SerializeField] private PlayerStats ps;
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
@@ -373,7 +372,10 @@ public class PlayerController : MonoBehaviour
         if(isHit == false)
         {
             health -= damageValue;
-            jumpCount++;
+            if(jumpCount < 3)
+            {
+                jumpCount++;
+            }
             audioSource.PlayOneShot(clips[Random.Range(0, 3)]);
             OnPlayerGetDamage?.Invoke(health);
             isHit = true;

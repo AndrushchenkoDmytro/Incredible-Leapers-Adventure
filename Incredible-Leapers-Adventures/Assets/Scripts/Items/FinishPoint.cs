@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FinishPoint : MonoBehaviour
@@ -13,7 +11,6 @@ public class FinishPoint : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,7 +30,11 @@ public class FinishPoint : MonoBehaviour
     }
     private void StopPlayer()
     {
-        GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
+        GameObject player = GameObject.Find("Player");
+        player.GetComponent<PlayerController>().enabled = false;
+        player.GetComponent<CapsuleCollider2D>().enabled = false;
+        player.GetComponent<Rigidbody2D>().gravityScale = 0;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
 }

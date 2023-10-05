@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 4
+  sceneIndex: 4
   bgPanel: {fileID: 165888577}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 591617151}

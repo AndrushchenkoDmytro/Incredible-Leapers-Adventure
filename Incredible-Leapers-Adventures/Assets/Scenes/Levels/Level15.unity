@@ -10727,8 +10727,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012417898, y: -0.1381221}
-  m_Size: {x: 1.9385958, y: 1.1462669}
+  m_Offset: {x: 0.10413634, y: -0.13812211}
+  m_Size: {x: 1.7551641, y: 1.1462696}
   m_Direction: 1
 --- !u!212 &549982173
 SpriteRenderer:
@@ -61057,7 +61057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 16
+  sceneIndex: 16
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}
@@ -63145,7 +63145,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  leftPointX: -3.06
+  leftPointX: -3
   rightPointX: 5.3
   overlapPOs: {fileID: 850574312}
   moveDirection: {x: -10, y: 0, z: 0}
@@ -63283,8 +63283,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012417898, y: -0.1381221}
-  m_Size: {x: 1.9385958, y: 1.1462669}
+  m_Offset: {x: 0.095088, y: -0.13812211}
+  m_Size: {x: 1.7732604, y: 1.1462693}
   m_Direction: 1
 --- !u!212 &2084654929
 SpriteRenderer:

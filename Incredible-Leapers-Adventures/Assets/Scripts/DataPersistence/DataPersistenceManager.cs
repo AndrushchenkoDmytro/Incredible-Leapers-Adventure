@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using GooglePlayGames.BasicApi;
 using System;
-using TMPro;
 using System.Threading.Tasks;
-using Unity.Services.CloudSave;
+
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -15,8 +10,9 @@ public class DataPersistenceManager : MonoBehaviour
     private IDataFileHandler cloudDataFileHandler = new GPGS_CloudDataFileHandler();
     private IDataFileHandler localDataFileHandler = new Local_DataFileHandler();
 
-    [SerializeField] public GameData localData = new GameData();
+    private GameData localData = new GameData();
     private GameData cloudData = new GameData();
+    private GameData gameData = new GameData();
 
     public Action OnGameDataReload;
 
@@ -32,29 +28,24 @@ public class DataPersistenceManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     public async void LoadDataFromCloud(Action callback)
     {
         if (GPGSManager.Instance.CheckAuthentication() == true)
         {
-            Debug.Log("isAuthenticated == true -> LoadCloudGame()");
-            cloudData = await LoadCloudDataAsync(); // «м≥нено на асинхронний виклик
+            cloudData = await LoadCloudDataAsync(); 
         }
         LoadLocalData();
-
-        if(cloudData != null)
+        if (cloudData != null)
         {
             if (cloudData.passedLevelsCount > localData.passedLevelsCount)
             {
-                Debug.Log("cloudData.passedLevelsCount > gameData.passedLevelsCount");
                 localData.passedLevelsCount = cloudData.passedLevelsCount;
             }
         }
         else
         {
-            Debug.Log("cloudData = null");
+
         }
-        Debug.Log(" cloudData - " + cloudData.passedLevelsCount + " | local - " + localData.passedLevelsCount);
         OnGameDataReload?.Invoke();
         callback?.Invoke();
     }
@@ -68,7 +59,6 @@ public class DataPersistenceManager : MonoBehaviour
     {
         GameData gameData = null;
         var tcs = new TaskCompletionSource<GameData>();
-
         cloudDataFileHandler.LoadData(saveName, (loadedString) =>
         {
             if (loadedString != null && loadedString != string.Empty)
@@ -89,24 +79,37 @@ public class DataPersistenceManager : MonoBehaviour
     {
         localDataFileHandler.LoadData(saveName, (loadedString) =>
         {
-            localData = JsonUtility.FromJson<GameData>(loadedString);
+            if (loadedString == string.Empty || loadedString == null)
+            {
+                StartNewGame();
+            }
+            else
+            {
+                gameData = JsonUtility.FromJson<GameData>(loadedString);
+            }
+            if(gameData != null)
+            {
+                localData.passedGameCount = gameData.passedGameCount;
+                localData.passedLevelsCount = gameData.passedLevelsCount;
+            }
         });
-
-        if(localData == null)
-        {
-            StartNewGame();
-        }
     }
 
     public void StartNewGame()
     {
-        localData = new GameData();
+        if(localData == null)
+        {
+            localData = new GameData();
+        }
+        localData.passedLevelsCount = 1;
+        SaveGame();
         OnGameDataReload?.Invoke();
     }
 
     public void SaveGame()
     {
         string saveData = JsonUtility.ToJson(localData);
+        Debug.Log(saveData);
 
         localDataFileHandler.SaveData(saveName, saveData);
 
@@ -128,9 +131,23 @@ public class DataPersistenceManager : MonoBehaviour
                 }
             });
         }
+        Debug.Log(localData.passedLevelsCount);
     }
-    private void OnApplicationQuit()
-    {
 
+    public int GetPassedLevelsCount()
+    {
+        return localData.passedLevelsCount;
+    }
+    public void AddPassedLevelsCount()
+    {
+        localData.passedLevelsCount++;
+    }
+    public int GetPassedGameCount()
+    {
+        return localData.passedGameCount;
+    }
+    public void AddPassedGameCount()
+    {
+        localData.passedLevelsCount++;
     }
 }

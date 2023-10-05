@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
@@ -51,6 +48,7 @@ public class PausePanel : MonoBehaviour
 
     public void OnAdWatched(int index)
     {
+        Time.timeScale = 1;
         bgPanel.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         LevelLoadManager.Instance.LoadScene(index);
     }

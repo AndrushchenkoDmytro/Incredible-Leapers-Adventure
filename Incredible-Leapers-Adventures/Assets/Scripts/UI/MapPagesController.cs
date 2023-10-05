@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class MapPagesController : MonoBehaviour
@@ -102,7 +100,7 @@ public class MapPagesController : MonoBehaviour
 
     IEnumerator SetPagesData()
     {
-        passedLevelsCount = DataPersistenceManager.Instance.localData.passedLevelsCount;
+        passedLevelsCount = DataPersistenceManager.Instance.GetPassedLevelsCount();
         Transform level;
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -114,6 +112,8 @@ public class MapPagesController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         StartPageSelect();
+        yield return new WaitForFixedUpdate();
+        yield break;
     }
 
 }

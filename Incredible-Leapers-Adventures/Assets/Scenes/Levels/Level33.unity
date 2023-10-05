@@ -78209,7 +78209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412fcda09f553840af920d3c10f5361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: {x: 0, y: 800}
+  throwForce: {x: 0, y: 1100}
 --- !u!82 &1709507619
 AudioSource:
   m_ObjectHideFlags: 0
@@ -89497,7 +89497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 34
+  sceneIndex: 34
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}

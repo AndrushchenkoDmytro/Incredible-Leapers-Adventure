@@ -13,7 +13,6 @@ public class GPGS_CloudDataFileHandler : IDataFileHandler
     private DataSource dataSource = DataSource.ReadCacheOrNetwork;
     private ConflictResolutionStrategy conflictStrategy = ConflictResolutionStrategy.UseLongestPlaytime;
 
-
     public void LoadData(string saveName, Action<string> onDataLoaded)
     {
         if (canInteract)
@@ -21,7 +20,6 @@ public class GPGS_CloudDataFileHandler : IDataFileHandler
             loadedData = string.Empty;
             returnResult = onDataLoaded;
             canInteract = false;
-            Debug.Log(" Interact ");
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(saveName, dataSource, conflictStrategy, OnCloudStorageOpen);
         }
         else

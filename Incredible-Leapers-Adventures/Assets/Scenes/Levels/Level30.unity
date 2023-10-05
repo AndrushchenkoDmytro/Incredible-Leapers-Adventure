@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 0}
   health: 100
-  movementSpeed: 6
+  movementSpeed: 5.75
   flyForce: 45
   jumpForce: 11.25
   jumpCount: 2
@@ -3293,7 +3293,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -8.965695, y: -1.6468701, z: -4}
+  m_LocalPosition: {x: -8.962413, y: -1.6468701, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11024,11 +11024,11 @@ CompositeCollider2D:
         Y: -20000000
       - X: 110000000
         Y: -55625000
-      - X: 100625000
+      - X: 90625000
         Y: -55625000
-      - X: 100000000
+      - X: 90000000
         Y: -56250000
-      - X: 100000000
+      - X: 90000000
         Y: -60000000
       - X: 110000000
         Y: -60000000
@@ -11088,10 +11088,10 @@ CompositeCollider2D:
       - {x: 11, y: -2.0005858}
       - {x: 11, y: -5.5619144}
       - {x: 10.999414, y: -5.5625}
-      - {x: 10.062347, y: -5.562652}
-      - {x: 10, y: -5.625215}
-      - {x: 10, y: -5.9994144}
-      - {x: 10.000586, y: -6}
+      - {x: 9.062347, y: -5.562652}
+      - {x: 9, y: -5.625215}
+      - {x: 9, y: -5.9994144}
+      - {x: 9.000586, y: -6}
       - {x: 10.999414, y: -6}
       - {x: 11, y: -6.0005856}
       - {x: 11, y: -6.9994144}
@@ -12788,11 +12788,21 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 10, y: -6, z: 0}
+  - first: {x: 9, y: -6, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 36
       m_TileSpriteIndex: 33
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 10, y: -6, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 43
+      m_TileSpriteIndex: 29
       m_TileMatrixIndex: 2
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -15226,8 +15236,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: ea9c31c9e1d6ca64ca1c6f026115795a, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: d9f8a8edfe56ed048b90b8275fc7b3a1, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: ddd81317dada03047b83a5d21ac2bbad, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 401eebaf25ff4944c8c98879037964e8, type: 2}
   - m_RefCount: 6
@@ -15295,8 +15305,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 662601547, guid: 7ea874f767f6bae4f8f8e69468d6a365, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -871524870, guid: 7ea874f767f6bae4f8f8e69468d6a365, type: 3}
   - m_RefCount: 1
@@ -15370,7 +15380,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 7
+  - m_RefCount: 8
     m_Data:
       e00: -1
       e01: 0
@@ -15407,7 +15417,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 386
+  - m_RefCount: 387
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
@@ -25593,7 +25603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 31
+  sceneIndex: 31
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}

@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
      
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioClip mainMenuMusic;
+    [SerializeField] AudioClip bossFightMusic;
     [SerializeField] AudioClip[] backGroundMusic;
 
     [SerializeField] AudioSource effectSource;
@@ -120,6 +121,12 @@ public class AudioManager : MonoBehaviour
     public void PlayLevelSelectEffect()
     {
         effectSource.PlayOneShot(levelSelect, 1);
+    }
+
+    public void PlayBossFightMusic()
+    {
+        musicSource.clip = bossFightMusic;
+        musicSource.Play();
     }
 
     public void PlayMainMenuMusic()

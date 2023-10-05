@@ -2117,7 +2117,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 793163681}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ToMap
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6792,8 +6792,14 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 6ca60b70e8403514a95466a5a02c3874, type: 2}
   musicSource: {fileID: 1309222257}
   mainMenuMusic: {fileID: 8300000, guid: 8a914ba5ef4a466468e30081cf8c2a43, type: 3}
+  bossFightMusic: {fileID: 8300000, guid: 31f768a1dd794db418d5ec6bf5c17be7, type: 3}
   backGroundMusic:
-  - {fileID: 8300000, guid: ae17ac6f33a469848acc811bf2ba3df9, type: 3}
+  - {fileID: 8300000, guid: fc5af015011ea3745b7f78ea1dd1049f, type: 3}
+  - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
+  - {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
+  - {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
+  - {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
+  - {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
   effectSource: {fileID: 562459813}
   enemyDeathSound:
   - {fileID: 8300000, guid: 45429eaa473c9e2408bbff1d79a34388, type: 3}
@@ -8575,7 +8581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c71d07fe359d043a4b008b60014661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneIndex: 16
+  SceneIndex: 17
   lockSprite: {fileID: 21300000, guid: 0ddcad2c81d6ce74d84ce93a3683a87d, type: 3}
 --- !u!1 &1744891470
 GameObject:

@@ -5696,8 +5696,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012417898, y: -0.1381221}
-  m_Size: {x: 1.9385958, y: 1.1462669}
+  m_Offset: {x: 0.10282015, y: -0.13812211}
+  m_Size: {x: 1.7577951, y: 1.1462688}
   m_Direction: 1
 --- !u!212 &680710869
 SpriteRenderer:
@@ -27483,7 +27483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 18
+  sceneIndex: 18
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
@@ -33,12 +30,6 @@ public class MainMenuController : MonoBehaviour
             musicSlider.value = 0.5f;
             effectSlider.value = 0.5f;
         }
-    }
-
-    public void SaveGame()
-    {
-        DataPersistenceManager.Instance.localData.passedLevelsCount = 1;
-        DataPersistenceManager.Instance.SaveGame();
     }
 
     public void ToMap()

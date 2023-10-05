@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.Advertisements;
-
 public class InitializeAds : MonoBehaviour, IUnityAdsInitializationListener
 {
     public string androidGameId;
@@ -10,8 +8,9 @@ public class InitializeAds : MonoBehaviour, IUnityAdsInitializationListener
     public bool isTestingMode = true;
     string gameId;
 
-    private void Awake()
+    private async void Awake()
     {
+        await UnityServices.InitializeAsync();
         Initialize();
     }
 

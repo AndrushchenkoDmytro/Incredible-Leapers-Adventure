@@ -252,7 +252,7 @@ MonoBehaviour:
   progressBar: {fileID: 2029675315}
   pauseMenu: {fileID: 505244018}
   mobileInput: {fileID: 1392716998}
-  SceneIndex: 8
+  sceneIndex: 8
 --- !u!1 &27814479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,7 +4157,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.966874, y: -1.6468701, z: -4}
+  m_LocalPosition: {x: -8.965688, y: -1.6468701, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27718,7 +27718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae93b4b6bf1fb5249ba5b7e8850144a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 8
+  sceneIndex: 8
   bgPanel: {fileID: 1550606250}
   finishPoint: {fileID: 1019410778}
   mobileInput: {fileID: 1392716998}

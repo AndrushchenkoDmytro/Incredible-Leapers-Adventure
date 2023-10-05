@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Rino : MonoBehaviour, IDamageCheck
@@ -24,7 +23,6 @@ public class Rino : MonoBehaviour, IDamageCheck
     [SerializeField] private bool isIdle = true;
     public bool hasTarget = false;
     public bool stopPursuit = true;
-    private bool isDie = false;
 
     private void Awake()
     {
@@ -142,7 +140,7 @@ public class Rino : MonoBehaviour, IDamageCheck
                 {
                     audioSource.Stop();
                     moveTime = 0;
-                    stayTime = Random.Range(1.5f, 2f);
+                    stayTime = Random.Range(1f, 1.5f);
                     moveLeft = true;
                     isIdle = true;
                     moveDirection *= -1;
@@ -196,7 +194,6 @@ public class Rino : MonoBehaviour, IDamageCheck
         audioSource.Stop();
         AudioManager.Instance.PlayEnemyDeathAudioEffect();
         stayTime = 4f;
-        isDie = true;
         isIdle = true;
         animator.SetInteger("State", 3);
         GetComponent<CapsuleCollider2D>().enabled = false;

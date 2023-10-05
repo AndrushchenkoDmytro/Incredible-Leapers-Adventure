@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class SpikeBall : MonoBehaviour
 {
@@ -39,14 +35,11 @@ public class SpikeBall : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            // Отримуємо відповідне значення кута з квадратичної функції для керування швидкістю
             float t = Mathf.PingPong(time * rotationSpeed, 1.0f);
             float slowedT = Mathf.SmoothStep(0.0f, 1.0f, t);
 
-            // Використовуємо лінійну інтерполяцію між мінімальним і максимальним кутами обертання
             float rotationAngle = Mathf.Lerp(minRotationAngle, maxRotationAngle, slowedT);
 
-            // Оновлюємо локальні ейлерові кути об'єкта
             transform.localEulerAngles = new Vector3(0, 0, rotationAngle);
         }
     }

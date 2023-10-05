@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.InputSystem;
 using UnityEngine.Advertisements;
-using Unity.VisualScripting;
+
 
 public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -38,10 +34,10 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
 
     public void ShowAdd(System.Action<int> OnAdShowed, int index)
     {
-        if(isPremium == false)
+        OnAdShowedCallback = OnAdShowed;
+        lastIndex = index;
+        if (isPremium == false)
         {
-            OnAdShowedCallback = OnAdShowed;
-            lastIndex = index;
             addsCount++;
             if (addsCount % 4 == 3)
             {
@@ -53,6 +49,7 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
                 return;
             }
         }
+        Debug.Log("OnAdShowedCallback.Invoke(lastIndex);");
         OnAdShowedCallback.Invoke(lastIndex);
         return;
     }

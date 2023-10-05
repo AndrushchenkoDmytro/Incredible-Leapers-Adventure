@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -83,6 +80,7 @@ public class LevelLoadManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         scene.allowSceneActivation = true;
+        yield break;
     }
 
     public async void LoadScene(int sceneIndex)
@@ -140,6 +138,10 @@ public class LevelLoadManager : MonoBehaviour
                 {
                     AudioManager.Instance.PlayMainMenuMusic();
                 }
+                else if(levelIndex == 37)
+                {
+                    AudioManager.Instance.PlayBossFightMusic();
+                }
                 else
                 {
                     AudioManager.Instance.PlayRandomMusic();
@@ -148,6 +150,7 @@ public class LevelLoadManager : MonoBehaviour
             imageProgress = null;
             scene.allowSceneActivation = true;
         }
+        yield break;
     }
 
 }

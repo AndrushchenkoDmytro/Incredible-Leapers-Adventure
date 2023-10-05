@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -52,5 +51,7 @@ public class Door : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
+        yield return new WaitForFixedUpdate();
+        yield break;
     }
 }

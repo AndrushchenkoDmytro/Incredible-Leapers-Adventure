@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Slime : MonoBehaviour,IDamageCheck
 {
@@ -123,22 +120,4 @@ public class Slime : MonoBehaviour,IDamageCheck
             return 15f;
         }
     }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-            if (collision.transform.position.y > transform.position.y + 0.25f)
-            {
-                playerController.ThrowCharacter(jumpDirection * 1.5f);
-                StartCoroutine(KillSlime());
-            }
-            else
-            {
-                playerController.ThrowCharacter(jumpDirection);
-                playerController.GetDamage(15);
-            }
-        }
-    }*/
 }

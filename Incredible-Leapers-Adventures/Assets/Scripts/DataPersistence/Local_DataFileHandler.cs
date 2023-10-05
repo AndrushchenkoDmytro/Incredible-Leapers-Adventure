@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
@@ -8,6 +6,8 @@ public class Local_DataFileHandler : IDataFileHandler
 {
     public void SaveData<T>(string saveName, T data)
     {
+        Debug.Log(data);
+        Debug.Log("data = " + data.ToString() );
         string filePath = string.Concat(Application.persistentDataPath,saveName);
 
         using(FileStream fileStream = new FileStream(filePath, FileMode.Create))

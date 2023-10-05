@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class Boss : MonoBehaviour, IDamageCheck
 {
@@ -12,8 +10,7 @@ public class Boss : MonoBehaviour, IDamageCheck
     private bool isUnprotected = false;
     [SerializeField] private bool faceRight = true;
     private float moveDirection = -1;
-    [SerializeField] private float moveSpeed = 5f;
-    private float aggressiveTime = 12f;
+    private float aggressiveTime = 11f;
     [SerializeField] private float speedUpTime = 0;
     [SerializeField] private float unProtectedTime = 3f;
     private float preparationTime = 3f;

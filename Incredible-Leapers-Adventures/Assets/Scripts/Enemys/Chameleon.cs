@@ -1,14 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chameleon : MonoBehaviour, IDamageCheck
 {
     private Rigidbody2D rb;
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
     private CapsuleCollider2D capsuleCollider2D;
     private AudioSource audioSource;
@@ -29,7 +25,6 @@ public class Chameleon : MonoBehaviour, IDamageCheck
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         boxCollider2D.enabled = false;
@@ -172,7 +167,6 @@ public class Chameleon : MonoBehaviour, IDamageCheck
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("PlayerEnter");
             audioSource.Stop();
             animator.SetInteger("State", 1);
             isMove = false;
