@@ -31,10 +31,7 @@ public class FinishPoint : MonoBehaviour
     private void StopPlayer()
     {
         GameObject player = GameObject.Find("Player");
-        player.GetComponent<PlayerController>().enabled = false;
-        player.GetComponent<CapsuleCollider2D>().enabled = false;
-        player.GetComponent<Rigidbody2D>().gravityScale = 0;
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        player.GetComponent<PlayerController>().PlayerWin();
     }
 
 }

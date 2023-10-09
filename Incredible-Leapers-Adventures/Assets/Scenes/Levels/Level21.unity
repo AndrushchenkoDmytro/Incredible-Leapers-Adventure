@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.2
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.2
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7910,8 +7910,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -12, y: -13, z: 0}
-  m_Size: {x: 25, y: 29, z: 1}
+  m_Origin: {x: -13, y: -13, z: 0}
+  m_Size: {x: 27, y: 29, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -9908,7 +9908,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.121568635, g: 0.1137255, b: 0.18431373, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -9958,7 +9958,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.41593266, y: -5.96756, z: -4}
+  m_LocalPosition: {x: 0.42358875, y: -6.68278, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14088,7 +14088,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0.49103832, y: 1.1656027}
+  m_Offset: {x: 0.49586296, y: 1.126584}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -14099,7 +14099,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 23.269602, y: 27.266344}
+  m_Size: {x: 23.674278, y: 27.344381}
   m_EdgeRadius: 0
 --- !u!66 &1037355366
 CompositeCollider2D:
@@ -14140,20 +14140,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1037355365}
     m_ColliderPaths:
-    - - X: 121258392
+    - - X: 123330024
         Y: 147987744
-      - X: -111437624
+      - X: -113412760
         Y: 147987744
-      - X: -111437624
-        Y: -124675696
-      - X: 121258392
-        Y: -124675696
+      - X: -113412760
+        Y: -125456064
+      - X: 123330024
+        Y: -125456064
   m_CompositePaths:
     m_Paths:
-    - - {x: 12.12581, y: -12.467569}
-      - {x: 12.12581, y: 14.798775}
-      - {x: -11.143763, y: 14.798746}
-      - {x: -11.143733, y: -12.467569}
+    - - {x: 12.332973, y: -12.545607}
+      - {x: 12.332973, y: 14.798775}
+      - {x: -11.341276, y: 14.798746}
+      - {x: -11.341247, y: -12.545607}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -17793,7 +17793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 1037355366}
   m_Damping: 0.5
-  m_MaxWindowSize: -1
+  m_MaxWindowSize: 0
 --- !u!1 &1706070588
 GameObject:
   m_ObjectHideFlags: 0
@@ -19557,7 +19557,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.35
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20545,8 +20545,8 @@ Transform:
   m_GameObject: {fileID: 2083521719}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4, y: 0, z: 1}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 0.5191, y: 0.7125, z: 1}
+  m_LocalScale: {x: 2.42376, y: 1, z: 2.4954045}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2045437839}

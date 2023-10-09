@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
     private float moveScale = 0.15f;
+    private float moveStep = 0.05f;
+    private float pressTime = 0;
     private float fallTime = 0;
     [SerializeField] private float flyForce = 10f;
     [SerializeField] private float jumpForce = 5f;
@@ -85,7 +87,40 @@ public class PlayerController : MonoBehaviour
             if (inputHandler.xInput != 0)
             {
                 if (moveScale < 1)
-                    moveScale += 0.04f;
+                {
+                    if (onGround)
+                    {
+                        if (pressTime < 0.06f)
+                        {
+                            moveScale = 0.15f;
+                        }
+                        else
+                        {
+                            moveScale += moveStep;
+                            if (moveStep < 0.15f)
+                                moveStep += 0.05f;
+                        }
+                    }
+                    else
+                    {
+                        if (pressTime < 0.04f)
+                        {
+                            moveScale = 0.25f;
+                            moveStep = 0.1f;
+                        }
+                        else
+                        {
+                            moveScale += moveStep;
+                            if (moveStep < 0.20f)
+                                moveStep += 0.075f;
+                        }
+                    }
+                }
+                else
+                {
+                    moveStep = 0.05f;
+                }
+                    
                 if (onGround == true)
                 {
                     if (!audioSource.isPlaying)
@@ -94,11 +129,16 @@ public class PlayerController : MonoBehaviour
                         audioSource.Play();
                     }
                 }
+                pressTime += Time.fixedDeltaTime;
             }
             else
             {
-                if (moveScale > 0.25f)
-                    moveScale -= 0.05f;
+                pressTime = 0;
+                if (moveScale > 0.15f)
+                {
+                    moveScale -= 0.025f;
+                    moveStep = 0.05f;
+                }
             }
         }
 
@@ -478,27 +518,38 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(force);
     }
 
+    public void PlayerWin()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        animator.SetInteger("PlayerState", 0);
+        canMove = false;
+        moveScale = 0;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            float damage = collision.gameObject.GetComponent<IDamageCheck>().CheckForDamage(transform.position);
-            if (damage <= 0)
+            if (canMove)
             {
-                rb.AddForce(new Vector2(0, Random.Range(180, 250)));
-            }
-            else
-            {
-                if(transform.position.x > collision.transform.position.x)
+                float damage = collision.gameObject.GetComponent<IDamageCheck>().CheckForDamage(transform.position);
+                if (damage <= 0)
                 {
-                    rb.AddForce(new Vector2(Random.Range(150, 250), Random.Range(250, 350)));
+                    rb.AddForce(new Vector2(0, Random.Range(180, 250)));
                 }
                 else
                 {
-                    rb.AddForce(new Vector2(Random.Range(-250, -150), Random.Range(250, 350)));
+                    if (transform.position.x > collision.transform.position.x)
+                    {
+                        rb.AddForce(new Vector2(Random.Range(150, 250), Random.Range(250, 350)));
+                    }
+                    else
+                    {
+                        rb.AddForce(new Vector2(Random.Range(-250, -150), Random.Range(250, 350)));
+                    }
+                    isJump = true;
+                    GetDamage(damage);
                 }
-                isJump = true;
-                GetDamage(damage);
             }
         }
     }

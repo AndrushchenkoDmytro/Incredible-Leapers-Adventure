@@ -2488,7 +2488,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.2
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13489,7 +13489,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.275363, y: -1.39798, z: -4}
+  m_LocalPosition: {x: -7.834276, y: -1.39798, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14118,7 +14118,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.2
+  m_fontSize: 21.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22772,7 +22772,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.35
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24477,7 +24477,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.2
+  m_fontSize: 10
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24921,7 +24921,7 @@ Transform:
   m_GameObject: {fileID: 982302896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.69, y: -5.79, z: 0}
+  m_LocalPosition: {x: 15.69, y: -5, z: 0}
   m_LocalScale: {x: 1.15, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25192,7 +25192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412fcda09f553840af920d3c10f5361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: {x: 920, y: 170}
+  throwForce: {x: 920, y: 400}
 --- !u!82 &1005602593
 AudioSource:
   m_ObjectHideFlags: 0

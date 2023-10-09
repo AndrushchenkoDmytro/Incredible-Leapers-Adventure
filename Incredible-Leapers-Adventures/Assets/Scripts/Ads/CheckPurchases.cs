@@ -6,7 +6,7 @@ public class CheckPurchases : MonoBehaviour
     [SerializeField] PurchasesInfo pinfo;
     public void OnPurchasesCompleted(Product product)
     {
-        if (product.definition.id == "com.TorioNyx_Games.IncredibleLeapersAdventures.removeAds")
+        if (product.definition.id == "com.torionyx_games.ila.removeads")
         {
             RemoveAds();
         }
@@ -15,6 +15,7 @@ public class CheckPurchases : MonoBehaviour
     private void RemoveAds()
     {
         PlayerPrefs.SetInt("removeAds", 1);
+        InterstitialAds.Instance.isPremium = true;
         if (pinfo!= null)
         {
             pinfo.RemoveAdsButton();

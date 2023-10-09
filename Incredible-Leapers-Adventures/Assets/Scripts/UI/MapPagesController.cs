@@ -66,6 +66,9 @@ public class MapPagesController : MonoBehaviour
 
     private void StartPageSelect()
     {
+        pageIndex = 0;
+        rectTransform.offsetMax = new Vector2(0, 0);
+        rectTransform.offsetMin = new Vector2(0, 0);
         for (int i = 0; i < transform.childCount-1; i++)
         {
             if (passedLevelsCount > 12 + 12 * i)

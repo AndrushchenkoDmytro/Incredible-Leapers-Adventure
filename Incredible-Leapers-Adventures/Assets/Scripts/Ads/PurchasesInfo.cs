@@ -6,6 +6,10 @@ public class PurchasesInfo : MonoBehaviour
     {
         RemoveAdsButton();
     }
+    private void Start()
+    {
+        RemoveAdsButton();
+    }
 
     public void RemoveAdsButton()
     {
