@@ -1,2 +1,2 @@
 # Incredible-Leapers-Adventure
-2d side scroller
+2d platformer
